@@ -1,22 +1,28 @@
 package mk.skillio.controller;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import mk.skillio.dto.ProfileResponse;
+import mk.skillio.dto.UpdateProfileRequest;
+import mk.skillio.service.UserService;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/profile")
+@RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
 
-    @GetMapping("/me")
-    public Map<String, Object> me(Authentication authentication) {
-        return Map.of(
-                "email", authentication.getName(),
-                "authorities", authentication.getAuthorities().toString()
-        );
+    @GetMapping
+    public ProfileResponse getProfile(Authentication authentication) {
+        return userService.getProfile(authentication.getName());
+    }
+    @PutMapping
+    public ProfileResponse updateProfile(Authentication authentication, @Valid @RequestBody UpdateProfileRequest request){
+        return userService.updateProfile(authentication.getName(), request);
     }
 }
