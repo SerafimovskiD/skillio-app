@@ -23,12 +23,29 @@ public class DataInitializer implements CommandLineRunner {
             return; // веќе има податоци, не додавај повторно
         }
 
-        seed("Programming languages", "Java", "Python", "JavaScript", "TypeScript", "C#", "C++", "SQL");
-        seed("Backend", "Spring Boot", "Hibernate", "REST API", "Node.js", "FastAPI");
-        seed("Frontend", "React", "HTML", "CSS", "Tailwind CSS");
-        seed("Databases", "PostgreSQL", "MySQL", "MongoDB");
-        seed("DevOps & Tools", "Git", "Docker", "Linux", "CI/CD");
-        seed("AI & Data", "Machine Learning", "NLP", "Pandas", "PyTorch");
+        seed("IT & Software",
+                "Java", "Python", "JavaScript", "TypeScript", "C#", "C++", "SQL",
+                "Spring Boot", "Hibernate", "REST API", "Node.js", "FastAPI",
+                "React", "HTML", "CSS", "Tailwind CSS",
+                "PostgreSQL", "MySQL", "MongoDB",
+                "Git", "Docker", "Linux", "CI/CD",
+                "Machine Learning", "NLP", "Pandas", "PyTorch");
+
+        seed("Finance & Accounting",
+                "Financial Analysis", "Accounting", "Excel", "Budgeting",
+                "Financial Reporting", "Bookkeeping", "Auditing");
+
+        seed("Marketing & Sales",
+                "SEO", "Social Media Marketing", "Content Writing", "Copywriting",
+                "Google Analytics", "Email Marketing", "Market Research", "Sales");
+
+        seed("Design & Creative",
+                "UI/UX Design", "Figma", "Photoshop", "Illustrator",
+                "Graphic Design", "Video Editing");
+
+        seed("Business & Management",
+                "Project Management", "Business Analysis", "Team Leadership",
+                "Customer Support", "Time Management", "Public Speaking");
     }
 
     private void seed(String categoryName, String... skillNames) {
