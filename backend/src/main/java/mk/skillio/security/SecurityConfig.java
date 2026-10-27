@@ -31,7 +31,9 @@ public class SecurityConfig {
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/error").permitAll()
-                        .requestMatchers("/api/profile/skills/**").hasRole("STUDENT")
+                        .requestMatchers("/api/profile/skills/**", "/api/profile/interests/**",
+                                "/api/profile/projects/**", "/api/profile/education/**").hasRole("STUDENT")
+                        .requestMatchers("/api/company/**").hasRole("COMPANY")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
