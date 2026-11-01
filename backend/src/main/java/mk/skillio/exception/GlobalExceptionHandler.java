@@ -49,4 +49,9 @@ public class GlobalExceptionHandler {
     private ResponseEntity<ErrorResponse> build(HttpStatus status, String message) {
         return ResponseEntity.status(status).body(new ErrorResponse(status.value(), message, Instant.now()));
     }
+
+    @ExceptionHandler(EmbeddingUnavailableException.class)
+    public ResponseEntity<ErrorResponse> handleEmbeddingUnavailable(EmbeddingUnavailableException ex) {
+        return build(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage());
+    }
 }

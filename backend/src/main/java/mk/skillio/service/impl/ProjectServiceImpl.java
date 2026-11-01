@@ -1,6 +1,7 @@
 package mk.skillio.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import mk.skillio.ai.EmbeddingRefreshEvent;
 import mk.skillio.dto.ProjectRequest;
 import mk.skillio.dto.ProjectResponse;
 import mk.skillio.exception.ResourceNotFoundException;
@@ -9,6 +10,7 @@ import mk.skillio.model.User;
 import mk.skillio.repository.ProjectRepository;
 import mk.skillio.repository.UserRepository;
 import mk.skillio.service.ProjectService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +22,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final UserRepository userRepository;
     private final ProjectRepository projectRepository;
-
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional(readOnly = true)
     public List<ProjectResponse> getMyProjects(String email) {
-        User user=findUser(email);
+        User user = findUser(email);
         return projectRepository.findByUserId(user.getId()).stream()
                 .map(this::toResponse).toList();
     }
@@ -33,28 +35,32 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional
     public ProjectResponse create(String email, ProjectRequest request) {
-        User user=findUser(email);
-        Project project =new Project();
+        User user = findUser(email);
+        Project project = new Project();
         project.setUser(user);
-        apply(project,request);
-        return toResponse(projectRepository.save(project));
+        apply(project, request);
+        Project saved = projectRepository.save(project);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
+        return toResponse(saved);
     }
 
     @Override
     @Transactional
     public ProjectResponse update(String email, Long projectId, ProjectRequest request) {
-        Project project=findOwnedProject(email,projectId);
-        apply(project,request);
+        Project project = findOwnedProject(email, projectId);
+        apply(project, request);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(project.getUser().getId()));
         return toResponse(project);
     }
 
     @Override
     @Transactional
     public void delete(String email, Long projectId) {
-        Project project=findOwnedProject(email,projectId);
+        Project project = findOwnedProject(email, projectId);
+        Long userId = project.getUser().getId();
         projectRepository.delete(project);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(userId));
     }
-
 
     private User findUser(String email) {
         return userRepository.findByEmail(email)

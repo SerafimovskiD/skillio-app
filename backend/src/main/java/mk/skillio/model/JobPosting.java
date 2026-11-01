@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import mk.skillio.enums.PostingType;
+import org.hibernate.annotations.Array;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -43,5 +46,10 @@ public class JobPosting {
     private LocalDate deadline;
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
+
+    @JdbcTypeCode(SqlTypes.VECTOR)
+    @Array(length = 384)
+    @Column(name = "embedding")
+    private float[] embedding;
 
 }

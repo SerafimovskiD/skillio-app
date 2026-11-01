@@ -9,12 +9,14 @@ import mk.skillio.repository.UserRepository;
 import mk.skillio.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import mk.skillio.ai.EmbeddingRefreshEvent;
+import org.springframework.context.ApplicationEventPublisher;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
 
     @Override
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
        user.setName(request.name().trim());
        user.setLocation(request.location());
        user.setBio(request.bio());
+       eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
        return toResponse(user);
     }
 

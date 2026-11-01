@@ -12,7 +12,8 @@ import mk.skillio.repository.UserRepository;
 import mk.skillio.service.UserInterestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import mk.skillio.ai.EmbeddingRefreshEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class UserInterestServiceImpl implements UserInterestService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
     private final UserInterestRepository userInterestRepository;
-
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional(readOnly = true)
@@ -44,6 +45,7 @@ public class UserInterestServiceImpl implements UserInterestService {
                     created.setCategory(category);
                     return userInterestRepository.save(created);
                 });
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
         return toResponse(interest);
     }
 
@@ -54,6 +56,7 @@ public class UserInterestServiceImpl implements UserInterestService {
         UserInterest interest=userInterestRepository.findByUserIdAndCategoryId(user.getId(),categoryId)
                 .orElseThrow(()->new ResourceNotFoundException("Interest is not in your profile"));
         userInterestRepository.delete(interest);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
     }
 
     private User findUser(String email) {

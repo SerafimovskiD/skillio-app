@@ -13,7 +13,8 @@ import mk.skillio.repository.UserSkillRepository;
 import mk.skillio.service.UserSkillService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import mk.skillio.ai.EmbeddingRefreshEvent;
+import org.springframework.context.ApplicationEventPublisher;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class UserSkillServiceImpl implements UserSkillService {
     private final UserSkillRepository userSkillRepository;
     private final SkillRepository skillRepository;
     private final UserRepository userRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional(readOnly = true)
@@ -57,6 +59,7 @@ public class UserSkillServiceImpl implements UserSkillService {
         });
         userSkill.setLevel(level);
         userSkillRepository.save(userSkill);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
         return toResponse(userSkill);
     }
 
@@ -66,5 +69,6 @@ public class UserSkillServiceImpl implements UserSkillService {
         User user = findUser(email);
         UserSkill userSkill = userSkillRepository.findByUserIdAndSkillId(user.getId(),skillId).orElseThrow(()->new ResourceNotFoundException("Skill is not in your profile"));
         userSkillRepository.delete(userSkill);
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.student(user.getId()));
     }
 }

@@ -1,6 +1,7 @@
 package mk.skillio.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import mk.skillio.ai.EmbeddingRefreshEvent;
 import mk.skillio.dto.PostingRequest;
 import mk.skillio.dto.PostingResponse;
 import mk.skillio.dto.PostingSkillRequest;
@@ -10,6 +11,7 @@ import mk.skillio.exception.ResourceNotFoundException;
 import mk.skillio.model.*;
 import mk.skillio.repository.*;
 import mk.skillio.service.PostingService;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,7 @@ public class PostingServiceImpl implements PostingService {
     private final CompanyRepository companyRepository;
     private final CategoryRepository categoryRepository;
     private final SkillRepository skillRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Override
     @Transactional
@@ -41,6 +44,7 @@ public class PostingServiceImpl implements PostingService {
         postingRepository.save(posting);
 
         saveSkills(posting, request.skills());
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.posting(posting.getId()));
         return toResponse(posting);
     }
 
@@ -60,7 +64,7 @@ public class PostingServiceImpl implements PostingService {
 
     @Override
     @Transactional
-    public PostingResponse update( String companyEmail,Long id, PostingRequest request) {
+    public PostingResponse update(String companyEmail, Long id, PostingRequest request) {
         JobPosting posting = findMyPosting(companyEmail, id);
         Category category = findCategory(request.categoryId());
 
@@ -69,12 +73,13 @@ public class PostingServiceImpl implements PostingService {
 
         postingSkillRepository.deleteAllByPostingId(posting.getId());
         saveSkills(posting, request.skills());
+        eventPublisher.publishEvent(EmbeddingRefreshEvent.posting(posting.getId()));
         return toResponse(posting);
     }
 
     @Override
     @Transactional
-    public void delete(String companyEmail,Long id) {
+    public void delete(String companyEmail, Long id) {
         JobPosting posting = findMyPosting(companyEmail, id);
         postingSkillRepository.deleteAllByPostingId(posting.getId());
         postingRepository.delete(posting);
@@ -96,7 +101,6 @@ public class PostingServiceImpl implements PostingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Posting not found"));
         return toResponse(posting);
     }
-
 
     private Company findCompany(String email) {
         return companyRepository.findByUserEmail(email)
@@ -162,6 +166,7 @@ public class PostingServiceImpl implements PostingService {
                 posting.getCreatedAt(),
                 skills);
     }
+
     private List<PostingResponse> toResponses(List<JobPosting> postings) {
         if (postings.isEmpty()) {
             return List.of();
