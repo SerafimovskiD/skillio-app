@@ -35,6 +35,7 @@ public class SecurityConfig {
                                 "/api/profile/projects/**", "/api/profile/education/**").hasRole("STUDENT")
                         .requestMatchers("/api/applications/**").hasRole("STUDENT")
                         .requestMatchers("/api/saved-postings/**").hasRole("STUDENT")
+                        .requestMatchers("/api/recommendations/**").hasRole("STUDENT")
                         .requestMatchers("/api/company/**").hasRole("COMPANY")
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

@@ -16,5 +16,6 @@ public interface PostingService {
     List<PostingResponse> getAll(Long categoryId);
 
     PostingResponse getById(Long id);
+    List<PostingResponse> getByIds(List<Long> ids);
 
 }

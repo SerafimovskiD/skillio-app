@@ -101,6 +101,14 @@ public class PostingServiceImpl implements PostingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Posting not found"));
         return toResponse(posting);
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostingResponse> getByIds(List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return List.of();
+        }
+        return toResponses(postingRepository.findAllByIdWithDetails(ids));
+    }
 
     private Company findCompany(String email) {
         return companyRepository.findByUserEmail(email)

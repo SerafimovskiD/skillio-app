@@ -31,4 +31,22 @@ public interface JobPostingRepository extends JpaRepository<JobPosting, Long> {
     Optional<JobPosting> findByIdWithDetails(@Param("id") Long id);
 
     boolean existsByIdAndCompanyUserEmail(Long id, String email);
+
+    @Query(value = """
+            select p.id as id,
+                   1 - (p.embedding <=> (select u.embedding from users u where u.id = :userId)) as score
+            from job_postings p
+            where p.embedding is not null
+              and (p.deadline is null or p.deadline >= current_date)
+            order by p.embedding <=> (select u.embedding from users u where u.id = :userId)
+            limit :limit
+            """, nativeQuery = true)
+    List<ScoredId> findMostSimilarToStudent(@Param("userId") Long userId, @Param("limit") int limit);
+
+    @Query("select p from JobPosting p join fetch p.company join fetch p.category "
+            + "where p.id in :ids")
+    List<JobPosting> findAllByIdWithDetails(@Param("ids") List<Long> ids);
+
+    @Query(value = "select id from job_postings where embedding is null", nativeQuery = true)
+    List<Long> findIdsWithoutEmbedding();
 }
