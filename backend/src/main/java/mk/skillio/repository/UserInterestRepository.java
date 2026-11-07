@@ -16,5 +16,8 @@ public interface UserInterestRepository extends JpaRepository<UserInterest, Long
 
     Optional<UserInterest> findByUserIdAndCategoryId(Long userId, Long categoryId);
 
+    @Query("select ui from UserInterest ui join fetch ui.category where ui.user.id in :userIds")
+    List<UserInterest> findAllByUserIdsWithCategory(@Param("userIds") java.util.Collection<Long> userIds);
+
 
 }

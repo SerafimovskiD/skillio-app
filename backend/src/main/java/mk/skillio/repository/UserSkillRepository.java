@@ -16,4 +16,7 @@ public interface UserSkillRepository extends JpaRepository<UserSkill, Long> {
 
     Optional<UserSkill> findByUserIdAndSkillId(Long userId, Long skillId);
 
+    @Query("select us from UserSkill us join fetch us.skill s where us.user.id in :userIds")
+    List<UserSkill> findAllByUserIdsWithSkill(@Param("userIds") java.util.Collection<Long> userIds);
+
 }

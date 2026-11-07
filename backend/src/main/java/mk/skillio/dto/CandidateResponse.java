@@ -7,6 +7,8 @@ public record CandidateResponse(Long userId,
                                 String location,
                                 String bio,
                                 List<String> skills,
-                                double score
-){
+                                double score,
+                                double similarity,
+                                SkillMatchResponse skillMatch,
+                                boolean categoryMatch) {
 }

@@ -2,6 +2,7 @@ package mk.skillio.controller;
 
 import lombok.RequiredArgsConstructor;
 import mk.skillio.dto.CandidateResponse;
+import mk.skillio.enums.RecommendationMode;
 import mk.skillio.service.RecommendationService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,8 @@ public class CompanyCandidateController {
     public List<CandidateResponse> candidates(
             Authentication authentication,
             @PathVariable Long postingId,
-            @RequestParam(defaultValue = "10") int limit) {
-        return recommendationService.findCandidates(authentication.getName(), postingId, limit);
+            @RequestParam(defaultValue = "10") int limit,
+            @RequestParam(defaultValue = "HYBRID") RecommendationMode mode) {
+        return recommendationService.findCandidates(authentication.getName(), postingId, limit, mode);
     }
 }

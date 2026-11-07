@@ -27,4 +27,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Query(value = "select id from users where role = 'STUDENT' and embedding is null", nativeQuery = true)
     List<Long> findStudentIdsWithoutEmbedding();
+
+    @Query(value = "select id from users where role = 'STUDENT'", nativeQuery = true)
+    List<Long> findStudentIds();
 }

@@ -49,4 +49,8 @@ public interface JobPostingRepository extends JpaRepository<JobPosting, Long> {
 
     @Query(value = "select id from job_postings where embedding is null", nativeQuery = true)
     List<Long> findIdsWithoutEmbedding();
+
+    @Query(value = "select id from job_postings where deadline is null or deadline >= current_date",
+            nativeQuery = true)
+    List<Long> findActiveIds();
 }
