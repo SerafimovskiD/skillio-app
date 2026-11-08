@@ -1,36 +1,34 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import client from './api/client'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import ProtectedRoute from './components/ProtectedRoute'
+import { useAuth } from './context/AuthContext'
+import { homeFor } from './utils/routes'
+import Login from './pages/auth/Login'
+import Register from './pages/auth/Register'
+import StudentDashboard from './pages/student/Dashboard'
+import CompanyDashboard from './pages/company/Dashboard'
 
-function Home() {
-    const [status, setStatus] = useState('проверувам...')
-
-    useEffect(() => {
-        client.get('/recommendations/postings')
-            .then((res) => setStatus(`OK (${res.status})`))
-            .catch((err) =>
-                setStatus(
-                    err.response
-                        ? `Backend одговори со ${err.response.status}`
-                        : 'Нема врска со backend'
-                )
-            )
-    }, [])
-
-    return (
-        <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-            <div className="rounded-xl bg-white p-8 shadow text-center">
-                <h1 className="text-3xl font-bold text-indigo-600">Skillio</h1>
-                <p className="mt-2 text-slate-600">Врска со backend: {status}</p>
-            </div>
-        </div>
-    )
+function Root() {
+    const { user } = useAuth()
+    return <Navigate to={user ? homeFor(user.role) : '/login'} replace />
 }
 
 export default function App() {
     return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-        </Routes>
+        <div className="min-h-screen bg-slate-50">
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Root />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/student" element={
+                    <ProtectedRoute role="STUDENT"><StudentDashboard /></ProtectedRoute>
+                } />
+                <Route path="/company" element={
+                    <ProtectedRoute role="COMPANY"><CompanyDashboard /></ProtectedRoute>
+                } />
+                <Route path="*" element={<Root />} />
+            </Routes>
+        </div>
     )
 }

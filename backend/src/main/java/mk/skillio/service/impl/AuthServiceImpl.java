@@ -55,7 +55,8 @@ public class AuthServiceImpl implements AuthService {
             companyRepository.save(company);
         }
         String token = jwtService.generateToken(user);
-        return new AuthResponse(token, user.getEmail(), user.getName(), user.getRole());
+        String companyName = request.role() == Role.COMPANY ? request.companyName().trim() : null;
+        return new AuthResponse(token, user.getEmail(), user.getName(), user.getRole(), companyName);
     }
 
     @Override
@@ -70,6 +71,9 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtService.generateToken(user);
-        return new AuthResponse(token, user.getEmail(), user.getName(), user.getRole());
+        String companyName = user.getRole() == Role.COMPANY
+                ? companyRepository.findByUserEmail(user.getEmail()).map(Company::getName).orElse(null)
+                : null;
+        return new AuthResponse(token, user.getEmail(), user.getName(), user.getRole(), companyName);
     }
 }
