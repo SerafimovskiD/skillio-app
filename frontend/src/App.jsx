@@ -8,7 +8,10 @@ import Register from './pages/auth/Register'
 import StudentDashboard from './pages/student/Dashboard'
 import CompanyDashboard from './pages/company/Dashboard'
 import StudentProfile from './pages/student/Profile'
-
+import StudentPostings from './pages/student/Postings'
+import StudentPostingDetails from './pages/student/PostingDetails'
+import StudentApplications from './pages/student/Applications'
+import StudentSavedPostings from './pages/student/SavedPostings'
 function Root() {
     const { user } = useAuth()
     return <Navigate to={user ? homeFor(user.role) : '/login'} replace />
@@ -30,6 +33,18 @@ export default function App() {
                 } />
                 <Route path="/student/profile" element={
                     <ProtectedRoute role="STUDENT"><StudentProfile /></ProtectedRoute>
+                } />
+                <Route path="/student/postings" element={
+                    <ProtectedRoute role="STUDENT"><StudentPostings /></ProtectedRoute>
+                } />
+                <Route path="/student/postings/:id" element={
+                    <ProtectedRoute role="STUDENT"><StudentPostingDetails /></ProtectedRoute>
+                } />
+                <Route path="/student/applications" element={
+                    <ProtectedRoute role="STUDENT"><StudentApplications /></ProtectedRoute>
+                } />
+                <Route path="/student/saved" element={
+                    <ProtectedRoute role="STUDENT"><StudentSavedPostings /></ProtectedRoute>
                 } />
                 <Route path="*" element={<Root />} />
             </Routes>
