@@ -7,6 +7,7 @@ import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import StudentDashboard from './pages/student/Dashboard'
 import CompanyDashboard from './pages/company/Dashboard'
+import StudentProfile from './pages/student/Profile'
 
 function Root() {
     const { user } = useAuth()
@@ -26,6 +27,9 @@ export default function App() {
                 } />
                 <Route path="/company" element={
                     <ProtectedRoute role="COMPANY"><CompanyDashboard /></ProtectedRoute>
+                } />
+                <Route path="/student/profile" element={
+                    <ProtectedRoute role="STUDENT"><StudentProfile /></ProtectedRoute>
                 } />
                 <Route path="*" element={<Root />} />
             </Routes>
