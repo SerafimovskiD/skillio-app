@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/error").permitAll()
                         .requestMatchers("/api/profile/skills/**", "/api/profile/interests/**",
-                                "/api/profile/projects/**", "/api/profile/education/**").hasRole("STUDENT")
+                                "/api/profile/projects/**", "/api/profile/education/**", "/api/profile/cv/**").hasRole("STUDENT")
                         .requestMatchers("/api/applications/**").hasRole("STUDENT")
                         .requestMatchers("/api/saved-postings/**").hasRole("STUDENT")
                         .requestMatchers("/api/recommendations/**").hasRole("STUDENT")

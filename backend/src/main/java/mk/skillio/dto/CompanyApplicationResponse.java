@@ -15,6 +15,7 @@ public record CompanyApplicationResponse(
         String studentEmail,
         String studentLocation,
         String studentBio,
-        List<ApplicantSkillResponse> skills
+        List<ApplicantSkillResponse> skills,
+        boolean hasCv
 ) {
 }

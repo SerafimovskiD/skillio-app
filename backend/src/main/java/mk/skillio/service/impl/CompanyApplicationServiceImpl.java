@@ -3,6 +3,7 @@ package mk.skillio.service.impl;
 import lombok.RequiredArgsConstructor;
 import mk.skillio.dto.ApplicantSkillResponse;
 import mk.skillio.dto.CompanyApplicationResponse;
+import mk.skillio.dto.CvFile;
 import mk.skillio.enums.ApplicationStatus;
 import mk.skillio.exception.BadRequestException;
 import mk.skillio.exception.ResourceNotFoundException;
@@ -12,6 +13,7 @@ import mk.skillio.repository.ApplicationRepository;
 import mk.skillio.repository.JobPostingRepository;
 import mk.skillio.repository.UserSkillRepository;
 import mk.skillio.service.CompanyApplicationService;
+import mk.skillio.service.CvService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ public class CompanyApplicationServiceImpl implements CompanyApplicationService 
     private final ApplicationRepository applicationRepository;
     private final JobPostingRepository postingRepository;
     private final UserSkillRepository userSkillRepository;
+    private final CvService cvService;
 
     @Override
     @Transactional(readOnly = true)
@@ -52,6 +55,18 @@ public class CompanyApplicationServiceImpl implements CompanyApplicationService 
         return toResponse(application);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public CvFile getApplicantCv(String companyEmail, Long applicationId) {
+        Application application = applicationRepository
+                .findByIdAndPostingCompanyUserEmail(applicationId, companyEmail)
+                .orElseThrow(() -> new ResourceNotFoundException("Application not found"));
+        if (!application.isCvAttached()) {
+            throw new ResourceNotFoundException("CV not found");
+        }
+        return cvService.loadFile(application.getUser());
+    }
+
     private CompanyApplicationResponse toResponse(Application application) {
         User student = application.getUser();
         List<ApplicantSkillResponse> skills = userSkillRepository.findAllByUserIdWithSkill(student.getId())
@@ -68,6 +83,7 @@ public class CompanyApplicationServiceImpl implements CompanyApplicationService 
                 student.getEmail(),
                 student.getLocation(),
                 student.getBio(),
-                skills);
+                skills,
+                application.isCvAttached() && student.getCvStoredName() != null);
     }
 }

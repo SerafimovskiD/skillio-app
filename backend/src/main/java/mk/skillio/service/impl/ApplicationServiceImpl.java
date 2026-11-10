@@ -46,6 +46,12 @@ public class ApplicationServiceImpl implements ApplicationService {
         application.setUser(user);
         application.setPosting(posting);
         application.setMessage(clean(request.message()));
+        if (Boolean.TRUE.equals(request.attachCv())) {
+            if (user.getCvStoredName() == null) {
+                throw new BadRequestException("You have no CV uploaded in your profile");
+            }
+            application.setCvAttached(true);
+        }
         applicationRepository.save(application);
         return toResponse(application);
     }
@@ -76,7 +82,8 @@ public class ApplicationServiceImpl implements ApplicationService {
                 posting.getCompany().getName(),
                 application.getStatus(),
                 application.getMessage(),
-                application.getCreatedAt());
+                application.getCreatedAt(),
+                application.isCvAttached());
     }
     private String clean(String message) {
         if (message == null || message.isBlank()) {

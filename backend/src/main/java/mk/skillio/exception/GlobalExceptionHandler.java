@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.time.Instant;
 import java.util.stream.Collectors;
@@ -53,5 +54,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmbeddingUnavailableException.class)
     public ResponseEntity<ErrorResponse> handleEmbeddingUnavailable(EmbeddingUnavailableException ex) {
         return build(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage());
+    }
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ErrorResponse> handleTooLarge(MaxUploadSizeExceededException ex) {
+        return build(HttpStatus.PAYLOAD_TOO_LARGE, "The CV is too large (maximum 5 MB).");
     }
 }

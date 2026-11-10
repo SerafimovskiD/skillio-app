@@ -43,6 +43,15 @@ public class User {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+    @Column(name = "cv_file_name")
+    private String cvFileName;
+
+    @Column(name = "cv_stored_name")
+    private String cvStoredName;
+
+    @Column(name = "cv_uploaded_at")
+    private Instant cvUploadedAt;
+
     @JdbcTypeCode(SqlTypes.VECTOR)
     @Array(length = 384)
     @Column(name = "embedding")

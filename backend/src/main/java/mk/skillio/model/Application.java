@@ -34,6 +34,9 @@ public class Application {
     @Column(columnDefinition = "text")
     private String message;
 
+    @Column(name = "cv_attached", nullable = false, columnDefinition = "boolean default false")
+    private boolean cvAttached = false;
+
     @Column(name = "created_at", nullable = false,updatable = false)
     private Instant createdAt=Instant.now();
 
