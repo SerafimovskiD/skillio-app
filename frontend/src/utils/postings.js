@@ -1,5 +1,5 @@
 export const TYPE_LABELS = { INTERNSHIP: 'Пракса', JOB: 'Работа' }
-
+export const WORK_MODE_LABELS = { REMOTE: 'Remote', HYBRID: 'Hybrid', ON_SITE: 'On-site' }
 // "2026-12-31" -> "31.12.2026"
 export const formatDate = (d) => (d ? d.split('-').reverse().join('.') : '')
 

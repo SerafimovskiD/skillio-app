@@ -101,6 +101,7 @@ public class PostingServiceImpl implements PostingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Posting not found"));
         return toResponse(posting);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<PostingResponse> getByIds(List<Long> ids) {
@@ -130,6 +131,7 @@ public class PostingServiceImpl implements PostingService {
         posting.setTitle(request.title().trim());
         posting.setDescription(request.description().trim());
         posting.setType(request.type());
+        posting.setWorkMode(request.workMode());
         posting.setLocation(request.location());
         posting.setCategory(category);
         posting.setDeadline(request.deadline());
@@ -167,6 +169,7 @@ public class PostingServiceImpl implements PostingService {
                 posting.getTitle(),
                 posting.getDescription(),
                 posting.getType(),
+                posting.getWorkMode(),
                 posting.getLocation(),
                 posting.getCategory().getId(),
                 posting.getCategory().getName(),
@@ -196,6 +199,7 @@ public class PostingServiceImpl implements PostingService {
                         p.getTitle(),
                         p.getDescription(),
                         p.getType(),
+                        p.getWorkMode(),
                         p.getLocation(),
                         p.getCategory().getId(),
                         p.getCategory().getName(),

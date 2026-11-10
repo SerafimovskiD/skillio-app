@@ -8,7 +8,7 @@ import mk.skillio.enums.PostingType;
 import org.hibernate.annotations.Array;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-
+import mk.skillio.enums.WorkMode;
 import java.time.Instant;
 import java.time.LocalDate;
 
@@ -37,6 +37,10 @@ public class JobPosting {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PostingType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "work_mode")
+    private WorkMode workMode;
 
     private String location;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getRecommendedPostings } from '../../api/recommendations'
-import { TYPE_LABELS, formatDate, isExpired } from '../../utils/postings'
+import { TYPE_LABELS, WORK_MODE_LABELS, formatDate, isExpired } from '../../utils/postings'
 import { scoreStyle, toPercent } from '../../utils/score'
 
 const MODES = [
@@ -87,6 +87,11 @@ function RecommendationCard({ item, showScore }) {
                 {posting.categoryName && (
                     <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-600">
                         {posting.categoryName}
+                    </span>
+                )}
+                {posting.workMode && (
+                    <span className="rounded-full bg-sky-50 px-2.5 py-1 text-sky-700">
+                        {WORK_MODE_LABELS[posting.workMode] ?? posting.workMode}
                     </span>
                 )}
             </div>

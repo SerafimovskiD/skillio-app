@@ -5,7 +5,7 @@ import { getPosting } from '../../api/postings'
 import { getMySavedPostings, savePosting, unsavePosting } from '../../api/savedPostings'
 import { getMySkills } from '../../api/skills'
 import RichText from '../../components/RichText'
-import { TYPE_LABELS, formatDate, isExpired, timeAgo } from '../../utils/postings'
+import { TYPE_LABELS, WORK_MODE_LABELS, formatDate, isExpired, timeAgo } from '../../utils/postings'
 
 function SkillChip({ name, have }) {
     return (
@@ -129,6 +129,11 @@ export default function PostingDetails() {
                     {posting.categoryName && (
                         <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-600">
                             {posting.categoryName}
+                        </span>
+                    )}
+                    {posting.workMode && (
+                        <span className="rounded-full bg-sky-50 px-2.5 py-1 text-sky-700">
+                            {WORK_MODE_LABELS[posting.workMode] ?? posting.workMode}
                         </span>
                     )}
                 </div>
