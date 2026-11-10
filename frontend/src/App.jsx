@@ -13,6 +13,11 @@ import StudentPostingDetails from './pages/student/PostingDetails'
 import StudentApplications from './pages/student/Applications'
 import StudentSavedPostings from './pages/student/SavedPostings'
 import StudentRecommendations from './pages/student/Recommendations'
+import CompanyProfile from './pages/company/CompanyProfile'
+import CompanyPostings from './pages/company/MyPostings'
+import PostingForm from './pages/company/PostingForm'
+import PostingApplications from './pages/company/PostingApplications'
+import PostingCandidates from './pages/company/PostingCandidates'
 function Root() {
     const { user } = useAuth()
     return <Navigate to={user ? homeFor(user.role) : '/login'} replace />
@@ -49,6 +54,24 @@ export default function App() {
                 } />
                 <Route path="/student/recommendations" element={
                     <ProtectedRoute role="STUDENT"><StudentRecommendations /></ProtectedRoute>
+                } />
+                <Route path="/company/profile" element={
+                    <ProtectedRoute role="COMPANY"><CompanyProfile /></ProtectedRoute>
+                } />
+                <Route path="/company/postings" element={
+                    <ProtectedRoute role="COMPANY"><CompanyPostings /></ProtectedRoute>
+                } />
+                <Route path="/company/postings/new" element={
+                    <ProtectedRoute role="COMPANY"><PostingForm /></ProtectedRoute>
+                } />
+                <Route path="/company/postings/:id/edit" element={
+                    <ProtectedRoute role="COMPANY"><PostingForm /></ProtectedRoute>
+                } />
+                <Route path="/company/postings/:id/applications" element={
+                    <ProtectedRoute role="COMPANY"><PostingApplications /></ProtectedRoute>
+                } />
+                <Route path="/company/postings/:id/candidates" element={
+                    <ProtectedRoute role="COMPANY"><PostingCandidates /></ProtectedRoute>
                 } />
                 <Route path="*" element={<Root />} />
             </Routes>

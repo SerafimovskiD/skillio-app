@@ -33,6 +33,13 @@ export default function Navbar() {
                             <NavLink to="/student/profile" className={navClass}>Профил</NavLink>
                         </nav>
                     )}
+                    {user?.role === 'COMPANY' && (
+                        <nav className="flex gap-5 text-sm">
+                            <NavLink to="/company" end className={navClass}>Почетна</NavLink>
+                            <NavLink to="/company/postings" className={navClass}>Мои огласи</NavLink>
+                            <NavLink to="/company/profile" className={navClass}>Профил</NavLink>
+                        </nav>
+                    )}
                 </div>
                 {user ? (
                     <div className="flex items-center gap-4 text-sm">

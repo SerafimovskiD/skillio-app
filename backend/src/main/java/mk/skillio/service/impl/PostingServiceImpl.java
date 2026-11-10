@@ -7,6 +7,7 @@ import mk.skillio.dto.PostingResponse;
 import mk.skillio.dto.PostingSkillRequest;
 import mk.skillio.dto.PostingSkillResponse;
 import mk.skillio.exception.BadRequestException;
+import mk.skillio.exception.ConflictException;
 import mk.skillio.exception.ResourceNotFoundException;
 import mk.skillio.model.*;
 import mk.skillio.repository.*;
@@ -30,6 +31,8 @@ public class PostingServiceImpl implements PostingService {
     private final CompanyRepository companyRepository;
     private final CategoryRepository categoryRepository;
     private final SkillRepository skillRepository;
+    private final ApplicationRepository applicationRepository;
+    private final SavedPostingRepository savedPostingRepository;
     private final ApplicationEventPublisher eventPublisher;
 
     @Override
@@ -81,6 +84,10 @@ public class PostingServiceImpl implements PostingService {
     @Transactional
     public void delete(String companyEmail, Long id) {
         JobPosting posting = findMyPosting(companyEmail, id);
+        if (applicationRepository.existsByPostingId(posting.getId())) {
+            throw new ConflictException("Огласот има апликации и не може да се избрише");
+        }
+        savedPostingRepository.deleteAllByPostingId(posting.getId());
         postingSkillRepository.deleteAllByPostingId(posting.getId());
         postingRepository.delete(posting);
     }

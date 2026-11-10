@@ -11,12 +11,15 @@ import java.util.Optional;
 
 public interface ApplicationRepository extends JpaRepository<Application, Long>
 {
-     boolean existsByUserEmailAndPostingId(String email,Long postingId);
-     Optional<Application>findByIdAndUserEmail(Long id,String email);
+    boolean existsByUserEmailAndPostingId(String email, Long postingId);
+
+    boolean existsByPostingId(Long postingId);
+
+    Optional<Application> findByIdAndUserEmail(Long id, String email);
 
     @Query("select a from Application a join fetch a.posting p join fetch p.company "
             + "where a.user.email = :email order by a.createdAt desc")
-     List<Application> findAllByUserEmail(@Param("email") String email);
+    List<Application> findAllByUserEmail(@Param("email") String email);
 
     @Query("select a from Application a join fetch a.user "
             + "where a.posting.id = :postingId order by a.createdAt desc")
