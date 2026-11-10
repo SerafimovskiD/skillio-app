@@ -12,6 +12,7 @@ import StudentPostings from './pages/student/Postings'
 import StudentPostingDetails from './pages/student/PostingDetails'
 import StudentApplications from './pages/student/Applications'
 import StudentSavedPostings from './pages/student/SavedPostings'
+import StudentRecommendations from './pages/student/Recommendations'
 function Root() {
     const { user } = useAuth()
     return <Navigate to={user ? homeFor(user.role) : '/login'} replace />
@@ -45,6 +46,9 @@ export default function App() {
                 } />
                 <Route path="/student/saved" element={
                     <ProtectedRoute role="STUDENT"><StudentSavedPostings /></ProtectedRoute>
+                } />
+                <Route path="/student/recommendations" element={
+                    <ProtectedRoute role="STUDENT"><StudentRecommendations /></ProtectedRoute>
                 } />
                 <Route path="*" element={<Root />} />
             </Routes>

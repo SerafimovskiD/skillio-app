@@ -27,6 +27,7 @@ export default function Navbar() {
                         <nav className="flex gap-5 text-sm">
                             <NavLink to="/student" end className={navClass}>Почетна</NavLink>
                             <NavLink to="/student/postings" className={navClass}>Огласи</NavLink>
+                            <NavLink to="/student/recommendations" className={navClass}>Препораки</NavLink>
                             <NavLink to="/student/applications" className={navClass}>Апликации</NavLink>
                             <NavLink to="/student/saved" className={navClass}>Зачувани</NavLink>
                             <NavLink to="/student/profile" className={navClass}>Профил</NavLink>
