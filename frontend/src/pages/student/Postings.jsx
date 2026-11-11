@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { getPostings } from '../../api/postings'
 import { getAllCategories } from '../../api/interests'
 import PostingCard from '../../components/PostingCard'
-import { TYPE_LABELS } from '../../utils/postings'
+import { TYPE_LABELS, WORK_MODE_LABELS } from '../../utils/postings'
 
 const selectClass =
     'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none'
@@ -15,6 +15,8 @@ export default function Postings() {
     const [query, setQuery] = useState('')
     const [categoryId, setCategoryId] = useState('')
     const [type, setType] = useState('')
+    const [workMode, setWorkMode] = useState('')
+    const [sort, setSort] = useState('new')
 
     useEffect(() => {
         Promise.all([getPostings(), getAllCategories()])
@@ -26,36 +28,52 @@ export default function Postings() {
             .finally(() => setLoading(false))
     }, [])
 
-    // Типовите што постојат во податоците (Пракса, Работа...)
     const types = useMemo(() => [...new Set(postings.map((p) => p.type))], [postings])
 
     const filtered = useMemo(() => {
         const q = query.trim().toLowerCase()
-        return postings
-            .filter(
-                (p) =>
-                    (!categoryId || String(p.categoryId) === categoryId) &&
-                    (!type || p.type === type) &&
-                    (!q || [p.title, p.companyName, p.location].some((v) => v?.toLowerCase().includes(q)))
-            )
-            .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
-    }, [postings, query, categoryId, type])
+        const list = postings.filter(
+            (p) =>
+                (!categoryId || String(p.categoryId) === categoryId) &&
+                (!type || p.type === type) &&
+                (!workMode || p.workMode === workMode) &&
+                (!q || [p.title, p.companyName, p.location].some((v) => v?.toLowerCase().includes(q)))
+        )
+        const byNewest = (a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? '')
+        if (sort === 'deadline') {
+            return list.sort((a, b) => {
+                if (!a.deadline && !b.deadline) return byNewest(a, b)
+                if (!a.deadline) return 1
+                if (!b.deadline) return -1
+                return a.deadline.localeCompare(b.deadline) || byNewest(a, b)
+            })
+        }
+        return list.sort(byNewest)
+    }, [postings, query, categoryId, type, workMode, sort])
 
-    const hasFilters = query || categoryId || type
+    const hasFilters = query || categoryId || type || workMode
     const clearFilters = () => {
         setQuery('')
         setCategoryId('')
         setType('')
+        setWorkMode('')
     }
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="flex items-end justify-between">
-                <h1 className="text-2xl font-bold text-slate-800">Огласи</h1>
-                {!loading && <p className="text-sm text-slate-500">{filtered.length} огласи</p>}
+            <div className="flex flex-wrap items-end justify-between gap-2">
+                <div>
+                    <h1 className="text-2xl font-bold text-slate-800">Огласи</h1>
+                    <p className="mt-1 text-slate-600">Пракси и работни позиции од компании.</p>
+                </div>
+                {!loading && (
+                    <p className="text-sm text-slate-500">
+                        {filtered.length} {filtered.length === 1 ? 'оглас' : 'огласи'}
+                    </p>
+                )}
             </div>
 
-            <div className="mt-4 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-3 rounded-xl bg-white p-4 shadow">
                 <input value={query} onChange={(e) => setQuery(e.target.value)}
                        placeholder="Барај по наслов, компанија или град..."
                        className="min-w-64 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none" />
@@ -71,10 +89,20 @@ export default function Postings() {
                         <option key={t} value={t}>{TYPE_LABELS[t] ?? t}</option>
                     ))}
                 </select>
+                <select value={workMode} onChange={(e) => setWorkMode(e.target.value)} className={selectClass}>
+                    <option value="">Начин на работа</option>
+                    {Object.entries(WORK_MODE_LABELS).map(([value, label]) => (
+                        <option key={value} value={value}>{label}</option>
+                    ))}
+                </select>
+                <select value={sort} onChange={(e) => setSort(e.target.value)} className={selectClass}>
+                    <option value="new">Најнови</option>
+                    <option value="deadline">Истекуваат наскоро</option>
+                </select>
                 {hasFilters && (
                     <button type="button" onClick={clearFilters}
                             className="rounded-lg px-3 py-2 text-sm text-indigo-600 hover:underline">
-                        Исчисти филтри
+                        Ресетирај филтри
                     </button>
                 )}
             </div>
@@ -84,7 +112,15 @@ export default function Postings() {
             {loading ? (
                 <p className="mt-6 text-slate-600">Се вчитува...</p>
             ) : filtered.length === 0 ? (
-                <p className="mt-6 text-slate-600">Нема огласи што одговараат на филтерот.</p>
+                <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
+                    <p className="text-slate-700">Нема огласи што одговараат на филтерот.</p>
+                    {hasFilters && (
+                        <button type="button" onClick={clearFilters}
+                                className="mt-3 rounded-lg border border-indigo-600 px-4 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50">
+                            Ресетирај филтри
+                        </button>
+                    )}
+                </div>
             ) : (
                 <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {filtered.map((p) => (

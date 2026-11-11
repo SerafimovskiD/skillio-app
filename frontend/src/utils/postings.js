@@ -16,3 +16,13 @@ export const timeAgo = (iso) => {
     const months = Math.floor(days / 30)
     return months === 1 ? 'пред 1 месец' : `пред ${months} месеци`
 }
+// колку дена остануваат до рокот (null ако нема рок)
+export const daysUntil = (deadline) => {
+    if (!deadline) return null
+    const end = new Date(`${deadline}T23:59:59`)
+    return Math.max(0, Math.ceil((end - Date.now()) / 86400000))
+}
+
+// објавен во последните 7 дена
+export const isNew = (createdAt) =>
+    !!createdAt && Date.now() - new Date(createdAt).getTime() < 7 * 86400000
