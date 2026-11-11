@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getMyApplications } from '../../api/applications'
+import { getMyCv } from '../../api/cv'
 import { getMyEducation } from '../../api/education'
 import { getMyInterests } from '../../api/interests'
 import { getProfile } from '../../api/profile'
@@ -8,21 +9,13 @@ import { getMyProjects } from '../../api/projects'
 import { getRecommendedPostings } from '../../api/recommendations'
 import { getMySavedPostings } from '../../api/savedPostings'
 import { getMySkills } from '../../api/skills'
+import StatTile from '../../components/StatTile'
 import { useAuth } from '../../context/AuthContext'
 import { APPLICATION_STATUS } from '../../utils/applications'
 import { timeAgo } from '../../utils/postings'
 import { scoreStyle, toPercent } from '../../utils/score'
 
 const val = (result, fallback) => (result.status === 'fulfilled' ? result.value : fallback)
-
-function StatTile({ label, value, to }) {
-    return (
-        <Link to={to} className="rounded-xl bg-white p-4 shadow hover:shadow-md">
-            <p className="text-2xl font-bold text-slate-800">{value}</p>
-            <p className="text-sm text-slate-600">{label}</p>
-        </Link>
-    )
-}
 
 export default function Dashboard() {
     const { user } = useAuth()
@@ -38,7 +31,8 @@ export default function Dashboard() {
             getMyApplications(),
             getMySavedPostings(),
             getRecommendedPostings('HYBRID', 3),
-        ]).then(([profile, skills, interests, projects, education, applications, saved, recs]) =>
+            getMyCv(),
+        ]).then(([profile, skills, interests, projects, education, applications, saved, recs, cv]) =>
             setData({
                 profile: val(profile, null),
                 skills: val(skills, []),
@@ -48,6 +42,7 @@ export default function Dashboard() {
                 applications: val(applications, []),
                 saved: val(saved, []),
                 recs: val(recs, []),
+                cv: val(cv, null),
             })
         )
     }, [])
@@ -56,7 +51,7 @@ export default function Dashboard() {
         return <p className="mx-auto max-w-5xl px-4 py-8 text-slate-600">Се вчитува...</p>
     }
 
-    const { profile, skills, interests, projects, education, applications, saved, recs } = data
+    const { profile, skills, interests, projects, education, applications, saved, recs, cv } = data
 
     const checks = [
         { label: 'Локација', done: Boolean(profile?.location?.trim()) },
@@ -65,6 +60,7 @@ export default function Dashboard() {
         { label: 'Интереси', done: interests.length > 0 },
         { label: 'Проект', done: projects.length > 0 },
         { label: 'Образование', done: education.length > 0 },
+        { label: 'CV', done: Boolean(cv) },
     ]
     const completeness = Math.round((checks.filter((c) => c.done).length / checks.length) * 100)
     const missing = checks.filter((c) => !c.done)
@@ -77,12 +73,24 @@ export default function Dashboard() {
 
     return (
         <div className="mx-auto max-w-5xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-800">Здраво, {user.name}</h1>
+            <div className="flex flex-wrap items-end justify-between gap-3">
+                <div>
+                    <h1 className="text-2xl font-bold text-slate-800">Здраво, {user.name}</h1>
+                    <p className="mt-1 text-slate-600">Најди пракса или работа што одговара на твоите вештини.</p>
+                </div>
+                <Link to="/student/postings"
+                      className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                    Прегледај огласи
+                </Link>
+            </div>
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
-                <StatTile label="Апликации" value={applications.length} to="/student/applications" />
-                <StatTile label="Зачувани огласи" value={saved.length} to="/student/saved" />
-                <StatTile label="Одговори од компании" value={answered} to="/student/applications" />
+                <StatTile label="Апликации" value={applications.length} to="/student/applications"
+                          icon="send" tone="indigo" />
+                <StatTile label="Зачувани огласи" value={saved.length} to="/student/saved"
+                          icon="bookmark" tone="amber" />
+                <StatTile label="Одговори од компании" value={answered} to="/student/applications"
+                          icon="check" tone="green" />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -107,14 +115,17 @@ export default function Dashboard() {
                                 const style = scoreStyle(pct)
                                 return (
                                     <Link key={r.posting.id} to={`/student/postings/${r.posting.id}`}
-                                          className="flex items-center justify-between gap-4 rounded-lg border border-slate-100 p-3 hover:bg-slate-50">
+                                          className="flex items-center justify-between gap-4 rounded-lg border border-slate-100 p-3 transition hover:border-indigo-200 hover:bg-slate-50">
                                         <div className="min-w-0">
                                             <p className="truncate font-medium text-slate-800">{r.posting.title}</p>
                                             <p className="truncate text-sm text-slate-600">
                                                 {[r.posting.companyName, r.posting.location].filter(Boolean).join(' · ')}
                                             </p>
                                         </div>
-                                        <span className={`shrink-0 text-lg font-bold ${style.text}`}>{pct}%</span>
+                                        <div className="shrink-0 text-right">
+                                            <span className={`text-lg font-bold ${style.text}`}>{pct}%</span>
+                                            <p className="text-xs text-slate-400">совпаѓање</p>
+                                        </div>
                                     </Link>
                                 )
                             })}
