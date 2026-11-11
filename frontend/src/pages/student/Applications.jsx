@@ -67,6 +67,9 @@ export default function Applications() {
                             </div>
 
                             <p className="mt-2 text-sm text-slate-500">Аплицирано {timeAgo(app.createdAt)}</p>
+                            {app.cvAttached && (
+                                <p className="mt-1 text-sm text-slate-500">📎 CV приложено</p>
+                            )}
 
                             {app.message && (
                                 <p className="mt-3 line-clamp-3 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">

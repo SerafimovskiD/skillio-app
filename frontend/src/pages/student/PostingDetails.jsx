@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { applyToPosting, getMyApplications } from '../../api/applications'
+import { getMyCv } from '../../api/cv'
 import { getPosting } from '../../api/postings'
 import { getMySavedPostings, savePosting, unsavePosting } from '../../api/savedPostings'
 import { getMySkills } from '../../api/skills'
@@ -25,6 +26,8 @@ export default function PostingDetails() {
     const [saved, setSaved] = useState(false)
     const [showForm, setShowForm] = useState(false)
     const [message, setMessage] = useState('')
+    const [cv, setCv] = useState(null)
+    const [attachCv, setAttachCv] = useState(false)
     const [busy, setBusy] = useState(false)
     const [actionError, setActionError] = useState('')
     const [loading, setLoading] = useState(true)
@@ -35,12 +38,14 @@ export default function PostingDetails() {
         setError('')
         setShowForm(false)
         setActionError('')
-        Promise.all([getPosting(id), getMySkills(), getMyApplications(), getMySavedPostings()])
-            .then(([p, s, apps, savedList]) => {
+        Promise.all([getPosting(id), getMySkills(), getMyApplications(), getMySavedPostings(), getMyCv()])
+            .then(([p, s, apps, savedList, myCv]) => {
                 setPosting(p)
                 setMySkills(s)
                 setApplication(apps.find((a) => a.postingId === p.id) ?? null)
                 setSaved(savedList.some((x) => x.postingId === p.id))
+                setCv(myCv)
+                setAttachCv(!!myCv)
             })
             .catch((err) =>
                 setError(err.response?.status === 404 ? 'Огласот не е пронајден.' : 'Не можев да го вчитам огласот.')
@@ -84,7 +89,7 @@ export default function PostingDetails() {
         setBusy(true)
         setActionError('')
         try {
-            const created = await applyToPosting(posting.id, message.trim())
+            const created = await applyToPosting(posting.id, message.trim(), attachCv && !!cv)
             setApplication(created)
             setShowForm(false)
             setMessage('')
@@ -149,7 +154,7 @@ export default function PostingDetails() {
                 <div className="mt-4 flex flex-wrap gap-3">
                     {application ? (
                         <span className="rounded-lg bg-green-50 px-5 py-2 font-medium text-green-700">
-                            ✓ Аплицирано
+                            ✓ Аплицирано{application.cvAttached ? ' · 📎 CV приложено' : ''}
                         </span>
                     ) : (
                         <button type="button" disabled={expired || busy}
@@ -173,6 +178,23 @@ export default function PostingDetails() {
                                       placeholder="Накратко зошто те интересира оваа позиција..."
                                       className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 font-normal focus:border-indigo-500 focus:outline-none" />
                         </label>
+
+                        {cv ? (
+                            <label className="flex items-center gap-2 text-sm text-slate-700">
+                                <input type="checkbox" checked={attachCv}
+                                       onChange={(e) => setAttachCv(e.target.checked)}
+                                       className="h-4 w-4 rounded border-slate-300 text-indigo-600" />
+                                Приложи го моето CV <span className="text-slate-500">({cv.fileName})</span>
+                            </label>
+                        ) : (
+                            <p className="text-sm text-slate-500">
+                                Немаш поставено CV.{' '}
+                                <Link to="/student/profile" className="text-indigo-600 hover:underline">
+                                    Постави CV во профилот
+                                </Link>
+                            </p>
+                        )}
+
                         <div className="flex gap-3">
                             <button type="submit" disabled={busy}
                                     className="rounded-lg bg-indigo-600 px-5 py-2 font-medium text-white hover:bg-indigo-700 disabled:opacity-60">
