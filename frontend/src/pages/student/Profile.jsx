@@ -5,6 +5,7 @@ import SkillsSection from '../../components/SkillsSection'
 import InterestsSection from '../../components/InterestsSection'
 import ProjectsSection from '../../components/ProjectsSection'
 import EducationSection from '../../components/EducationSection'
+import CvSection from "../../components/CvSection";
 const inputClass =
     'w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none'
 
@@ -95,6 +96,7 @@ export default function Profile() {
             <InterestsSection/>
             <ProjectsSection/>
             <EducationSection/>
+            <CvSection />
         </div>
     )
 }
