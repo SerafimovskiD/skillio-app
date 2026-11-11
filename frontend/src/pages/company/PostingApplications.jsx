@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getMyPosting } from '../../api/companyPostings'
-import { getPostingApplications, updateApplicationStatus } from '../../api/companyApplications'
+import {
+    downloadApplicationCv,
+    getPostingApplications,
+    updateApplicationStatus,
+} from '../../api/companyApplications'
 import PostingNotFound from '../../components/PostingNotFound'
 
 const STATUSES = [
@@ -32,6 +36,7 @@ export default function PostingApplications() {
     const [notFound, setNotFound] = useState(false)
     const [filter, setFilter] = useState('')
     const [savingId, setSavingId] = useState(null)
+    const [cvBusyId, setCvBusyId] = useState(null)
 
     useEffect(() => {
         Promise.all([getMyPosting(id), getPostingApplications(id)])
@@ -68,6 +73,18 @@ export default function PostingApplications() {
             setError(err.response?.data?.message ?? 'Статусот не може да се промени.')
         } finally {
             setSavingId(null)
+        }
+    }
+
+    const downloadCv = async (application) => {
+        setError('')
+        setCvBusyId(application.id)
+        try {
+            await downloadApplicationCv(application.id, `CV - ${application.studentName}.pdf`)
+        } catch {
+            setError('CV-то не може да се преземе.')
+        } finally {
+            setCvBusyId(null)
         }
     }
 
@@ -163,6 +180,18 @@ export default function PostingApplications() {
                                         ))
                                     ) : (
                                         <span className="text-xs text-slate-400">Нема внесени вештини.</span>
+                                    )}
+                                </div>
+
+                                <div className="mt-4 border-t border-slate-100 pt-3">
+                                    {a.hasCv ? (
+                                        <button type="button" onClick={() => downloadCv(a)}
+                                                disabled={cvBusyId === a.id}
+                                                className="rounded-lg border border-indigo-600 px-4 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50 disabled:opacity-60">
+                                            {cvBusyId === a.id ? 'Се презема...' : 'Преземи CV'}
+                                        </button>
+                                    ) : (
+                                        <span className="text-xs text-slate-400">Нема приложено CV.</span>
                                     )}
                                 </div>
                             </div>
