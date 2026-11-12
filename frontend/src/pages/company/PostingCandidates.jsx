@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import { getMyPosting } from '../../api/companyPostings'
 import { getCandidates } from '../../api/companyCandidates'
 import PostingNotFound from '../../components/PostingNotFound'
+import { scoreStyle } from '../../utils/score'
+import { initials } from '../../utils/applications'
 
 const MODES = [
     { value: 'HYBRID', label: 'Комбинирано', hint: 'Ги комбинира AI сличноста на текст, вештините и областа. Препорачано.' },
@@ -12,11 +14,8 @@ const MODES = [
 
 const skillName = (s) => (typeof s === 'string' ? s : s?.name)
 
-function scoreClasses(pct) {
-    if (pct >= 70) return { text: 'text-green-700', bar: 'bg-green-500' }
-    if (pct >= 40) return { text: 'text-amber-700', bar: 'bg-amber-500' }
-    return { text: 'text-slate-600', bar: 'bg-slate-400' }
-}
+const edgeClass = (pct) =>
+    pct >= 70 ? 'border-l-green-500' : pct >= 40 ? 'border-l-amber-400' : 'border-l-slate-300'
 
 export default function PostingCandidates() {
     const { id } = useParams()
@@ -50,6 +49,7 @@ export default function PostingCandidates() {
     }, [id, mode, notFound])
 
     const allZero = candidates.length > 0 && candidates.every((c) => Math.round(c.score * 100) === 0)
+    const strong = candidates.filter((c) => Math.round(c.score * 100) >= 70).length
     const current = MODES.find((m) => m.value === mode)
 
     if (notFound) return <PostingNotFound />
@@ -74,26 +74,36 @@ export default function PostingCandidates() {
             </div>
             <p className="mt-2 text-sm text-slate-500">{current.hint}</p>
 
-            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+            {error && (
+                <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            )}
 
             {loading ? (
-                <p className="mt-6 text-slate-600">Се вчитува...</p>
+                <p className="mt-6 text-slate-500">Се вчитува...</p>
             ) : candidates.length === 0 ? (
-                <p className="mt-6 text-slate-600">
-                    Сè уште нема кандидати со доволно податоци во профилот.
-                </p>
+                <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
+                    <p className="font-medium text-slate-800">Нема препорачани кандидати</p>
+                    <p className="mt-1 text-sm text-slate-500">
+                        Сè уште нема кандидати со доволно податоци во профилот.
+                    </p>
+                </div>
             ) : (
                 <>
-                    {allZero && (
+                    {allZero ? (
                         <p className="mt-6 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
                             Ниеден кандидат нема совпаѓање во овој режим. Пробај „Комбинирано" или додај
                             вештини во огласот.
                         </p>
+                    ) : (
+                        <div className="mt-5 space-y-0.5 text-sm text-slate-600">
+                            <p>Кандидати: <b>{candidates.length}</b></p>
+                            <p>Со совпаѓање од 70% или повеќе: <b>{strong}</b></p>
+                        </div>
                     )}
-                    <div className="mt-6 space-y-4">
-                        {candidates.map((c) => {
+                    <div className="mt-4 space-y-4">
+                        {candidates.map((c, index) => {
                             const pct = Math.round(c.score * 100)
-                            const style = scoreClasses(pct)
+                            const style = scoreStyle(pct)
                             const matched = (c.skillMatch?.matched ?? []).map(skillName)
                             const missing = (c.skillMatch?.missing ?? []).map(skillName)
                             const total = matched.length + missing.length
@@ -101,11 +111,24 @@ export default function PostingCandidates() {
                             const others = (c.skills ?? []).filter((s) => !matchedSet.has(s))
 
                             return (
-                                <div key={c.userId} className="rounded-xl border border-slate-200 bg-white p-5">
+                                <div key={c.userId}
+                                     className={`rounded-xl border-l-4 bg-white p-5 shadow ${
+                                         allZero ? 'border-l-slate-300' : edgeClass(pct)
+                                     }`}>
                                     <div className="flex items-start justify-between gap-4">
-                                        <div>
-                                            <h2 className="text-lg font-semibold text-slate-800">{c.name}</h2>
-                                            {c.location && <p className="text-sm text-slate-500">{c.location}</p>}
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700">
+                                                {initials(c.name)}
+                                            </div>
+                                            <div>
+                                                <h2 className="text-lg font-semibold leading-tight text-slate-800">
+                                                    <span className="mr-2 text-sm font-medium text-slate-400">
+                                                        #{index + 1}
+                                                    </span>
+                                                    {c.name}
+                                                </h2>
+                                                {c.location && <p className="text-sm text-slate-500">{c.location}</p>}
+                                            </div>
                                         </div>
                                         {!allZero && (
                                             <div className="text-right">
@@ -135,7 +158,7 @@ export default function PostingCandidates() {
                                                 ))}
                                                 {missing.map((s) => (
                                                     <span key={`x-${s}`}
-                                                          className="rounded-full bg-red-50 px-2.5 py-0.5 text-xs text-red-600">
+                                                          className="rounded-full bg-red-50 px-2.5 py-0.5 text-xs text-red-700">
                                                         ✗ {s}
                                                     </span>
                                                 ))}

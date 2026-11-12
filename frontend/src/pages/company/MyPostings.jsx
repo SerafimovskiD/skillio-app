@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getMyPostings, deletePosting } from '../../api/companyPostings'
 import { TYPE_LABELS, WORK_MODE_LABELS, daysUntil, formatDate, isExpired } from '../../utils/postings'
+import { plural, pluralWord } from '../../utils/plural'
 
 export default function MyPostings() {
     const [postings, setPostings] = useState([])
@@ -32,6 +33,7 @@ export default function MyPostings() {
     }
 
     const active = postings.filter((p) => !isExpired(p.deadline)).length
+    const expiredCount = postings.length - active
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
@@ -40,7 +42,9 @@ export default function MyPostings() {
                     <h1 className="text-2xl font-bold text-slate-800">Мои огласи</h1>
                     {!loading && (
                         <p className="mt-1 text-sm text-slate-500">
-                            {postings.length} огласи · {active} активни · {postings.length - active} истечени
+                            {plural(postings.length, 'оглас', 'огласи')} · {active}{' '}
+                            {pluralWord(active, 'активен', 'активни')} · {expiredCount}{' '}
+                            {pluralWord(expiredCount, 'истечен', 'истечени')}
                         </p>
                     )}
                 </div>
@@ -50,13 +54,18 @@ export default function MyPostings() {
                 </Link>
             </div>
 
-            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+            {error && (
+                <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            )}
 
             {loading ? (
-                <p className="mt-6 text-slate-600">Се вчитува...</p>
+                <p className="mt-6 text-slate-500">Се вчитува...</p>
             ) : postings.length === 0 ? (
                 <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
-                    <p className="text-slate-700">Сè уште немаш објавено огласи.</p>
+                    <p className="font-medium text-slate-800">Сè уште немаш објавено огласи</p>
+                    <p className="mt-1 text-sm text-slate-500">
+                        Објави го првиот оглас и добиј препорачани кандидати.
+                    </p>
                     <Link to="/company/postings/new"
                           className="mt-4 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
                         Објави прв оглас

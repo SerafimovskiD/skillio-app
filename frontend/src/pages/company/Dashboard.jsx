@@ -5,31 +5,9 @@ import { getMyPostings } from '../../api/companyPostings'
 import { getPostingApplications } from '../../api/companyApplications'
 import { getCompanyProfile } from '../../api/companyProfile'
 import { isExpired } from '../../utils/postings'
+import { APPLICATION_STATUS, formatDate, initials } from '../../utils/applications'
+import { plural } from '../../utils/plural'
 import StatTile from '../../components/StatTile'
-
-const STATUS = {
-    SENT: { label: 'Испратено', cls: 'bg-slate-100 text-slate-700' },
-    REVIEWED: { label: 'Прегледано', cls: 'bg-blue-50 text-blue-700' },
-    INTERVIEW: { label: 'Интервју', cls: 'bg-amber-50 text-amber-700' },
-    REJECTED: { label: 'Одбиено', cls: 'bg-red-50 text-red-700' },
-    ACCEPTED: { label: 'Прифатено', cls: 'bg-green-50 text-green-700' },
-}
-
-const formatDate = (iso) => {
-    if (!iso) return ''
-    const d = new Date(iso)
-    const dd = String(d.getDate()).padStart(2, '0')
-    const mm = String(d.getMonth() + 1).padStart(2, '0')
-    return `${dd}.${mm}.${d.getFullYear()}`
-}
-
-const initials = (name) =>
-    (name ?? '?')
-        .split(' ')
-        .filter(Boolean)
-        .slice(0, 2)
-        .map((w) => w[0].toUpperCase())
-        .join('')
 
 const linkBtn =
     'rounded-lg border border-slate-300 px-3 py-1.5 text-slate-700 hover:bg-slate-50'
@@ -103,7 +81,9 @@ export default function Dashboard() {
                 </Link>
             </div>
 
-            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
+            {error && (
+                <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            )}
 
             {profileIncomplete && (
                 <div className="mt-5 rounded-lg bg-amber-50 p-3 text-sm text-amber-800">
@@ -114,10 +94,10 @@ export default function Dashboard() {
             )}
 
             {loading ? (
-                <p className="mt-6 text-slate-600">Се вчитува...</p>
+                <p className="mt-6 text-slate-500">Се вчитува...</p>
             ) : (
                 <>
-                    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatTile label="Активни огласи" value={activePostings} icon="document" tone="indigo"
                                   hint={`од вкупно ${postings.length}`} to="/company/postings" />
                         <StatTile label="Вкупно апликации" value={applications.length} icon="users" tone="sky" />
@@ -126,8 +106,8 @@ export default function Dashboard() {
                         <StatTile label="На интервју" value={interviews} icon="check" tone="green" />
                     </div>
 
-                    <div className="mt-6 grid gap-6 lg:grid-cols-5">
-                        <section className="rounded-xl bg-white p-6 shadow lg:col-span-3">
+                    <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-5">
+                        <section className="min-w-0 rounded-xl bg-white p-6 shadow lg:col-span-3">
                             <div className="flex items-center justify-between">
                                 <h2 className="text-lg font-semibold text-slate-800">Мои огласи</h2>
                                 <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
@@ -149,9 +129,9 @@ export default function Dashboard() {
                                         const expired = isExpired(p.deadline)
                                         return (
                                             <li key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
-                                                <div className="min-w-0">
-                                                    <div className="flex items-center gap-2">
-                                                        <p className="truncate font-medium text-slate-800">{p.title}</p>
+                                                <div className="min-w-0 max-w-full">
+                                                    <div className="flex min-w-0 items-center gap-2">
+                                                        <p className="min-w-0 truncate font-medium text-slate-800">{p.title}</p>
                                                         <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs ${
                                                             expired ? 'bg-red-50 text-red-700' : 'bg-green-50 text-green-700'
                                                         }`}>
@@ -159,10 +139,10 @@ export default function Dashboard() {
                                                         </span>
                                                     </div>
                                                     <p className="mt-0.5 text-sm text-slate-500">
-                                                        {s.total} апликации
+                                                        {plural(s.total, 'апликација', 'апликации')}
                                                         {s.fresh > 0 && (
                                                             <span className="ml-2 rounded-full bg-amber-50 px-2 py-0.5 text-xs font-medium text-amber-700">
-                                                                {s.fresh} нови
+                                                                {s.fresh === 1 ? '1 нова' : `${s.fresh} нови`}
                                                             </span>
                                                         )}
                                                         {p.deadline && ` · рок ${formatDate(p.deadline)}`}
@@ -184,7 +164,7 @@ export default function Dashboard() {
                             )}
                         </section>
 
-                        <section className="rounded-xl bg-white p-6 shadow lg:col-span-2">
+                        <section className="min-w-0 rounded-xl bg-white p-6 shadow lg:col-span-2">
                             <h2 className="text-lg font-semibold text-slate-800">Последни апликации</h2>
 
                             {applications.length === 0 ? (
@@ -192,7 +172,7 @@ export default function Dashboard() {
                             ) : (
                                 <ul className="mt-2 divide-y divide-slate-100">
                                     {applications.slice(0, 5).map((a) => {
-                                        const st = STATUS[a.status]
+                                        const st = APPLICATION_STATUS[a.status]
                                         return (
                                             <li key={a.id}>
                                                 <Link to={`/company/postings/${a.postingId}/applications`}
@@ -207,7 +187,7 @@ export default function Dashboard() {
                                                             {a.hasCv && ' · CV'}
                                                         </p>
                                                     </div>
-                                                    <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ${st?.cls ?? ''}`}>
+                                                    <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium ${st?.className ?? ''}`}>
                                                         {st?.label ?? a.status}
                                                     </span>
                                                 </Link>

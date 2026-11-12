@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getMySavedPostings, unsavePosting } from '../../api/savedPostings'
 import PostingCard from '../../components/PostingCard'
 import { timeAgo } from '../../utils/postings'
+import { plural } from '../../utils/plural'
 
 export default function SavedPostings() {
     const [items, setItems] = useState([])
@@ -36,12 +37,14 @@ export default function SavedPostings() {
                     <p className="mt-1 text-slate-600">Огласи што си ги зачувал за подоцна.</p>
                 </div>
                 {!loading && items.length > 0 && (
-                    <p className="text-sm text-slate-500">{items.length} огласи</p>
+                    <p className="text-sm text-slate-500">{plural(items.length, 'оглас', 'огласи')}</p>
                 )}
             </div>
 
-            {error && <p className="mt-4 text-red-600">{error}</p>}
-            {loading && <p className="mt-4 text-slate-600">Се вчитува...</p>}
+            {error && (
+                <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            )}
+            {loading && <p className="mt-4 text-slate-500">Се вчитува...</p>}
 
             {!loading && items.length === 0 && !error && (
                 <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
@@ -56,7 +59,7 @@ export default function SavedPostings() {
                 </div>
             )}
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((item) => (
                     <PostingCard key={item.postingId}
                                  posting={{ ...item, id: item.postingId }}

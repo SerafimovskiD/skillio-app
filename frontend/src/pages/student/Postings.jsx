@@ -3,9 +3,11 @@ import { getPostings } from '../../api/postings'
 import { getAllCategories } from '../../api/interests'
 import PostingCard from '../../components/PostingCard'
 import { TYPE_LABELS, WORK_MODE_LABELS } from '../../utils/postings'
+import { plural } from '../../utils/plural'
 
+// на мобилен по два во ред, на поголем екран природна ширина
 const selectClass =
-    'rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none'
+    'w-[calc(50%-6px)] rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none sm:w-auto'
 
 export default function Postings() {
     const [postings, setPostings] = useState([])
@@ -68,7 +70,7 @@ export default function Postings() {
                 </div>
                 {!loading && (
                     <p className="text-sm text-slate-500">
-                        {filtered.length} {filtered.length === 1 ? 'оглас' : 'огласи'}
+                        {plural(filtered.length, 'оглас', 'огласи')}
                     </p>
                 )}
             </div>
@@ -76,7 +78,7 @@ export default function Postings() {
             <div className="mt-5 flex flex-wrap gap-3 rounded-xl bg-white p-4 shadow">
                 <input value={query} onChange={(e) => setQuery(e.target.value)}
                        placeholder="Барај по наслов, компанија или град..."
-                       className="min-w-64 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none" />
+                       className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none sm:w-auto sm:min-w-64 sm:flex-1" />
                 <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} className={selectClass}>
                     <option value="">Сите области</option>
                     {categories.map((c) => (
@@ -101,16 +103,18 @@ export default function Postings() {
                 </select>
                 {hasFilters && (
                     <button type="button" onClick={clearFilters}
-                            className="rounded-lg px-3 py-2 text-sm text-indigo-600 hover:underline">
+                            className="rounded-lg px-1 py-2 text-sm text-indigo-600 hover:underline sm:px-3">
                         Ресетирај филтри
                     </button>
                 )}
             </div>
 
-            {error && <p className="mt-6 text-sm text-red-600">{error}</p>}
+            {error && (
+                <div className="mt-6 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+            )}
 
             {loading ? (
-                <p className="mt-6 text-slate-600">Се вчитува...</p>
+                <p className="mt-6 text-slate-500">Се вчитува...</p>
             ) : filtered.length === 0 ? (
                 <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
                     <p className="text-slate-700">Нема огласи што одговараат на филтерот.</p>
@@ -122,7 +126,7 @@ export default function Postings() {
                     )}
                 </div>
             ) : (
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {filtered.map((p) => (
                         <PostingCard key={p.id} posting={p} />
                     ))}

@@ -7,24 +7,27 @@ import {
     updateApplicationStatus,
 } from '../../api/companyApplications'
 import PostingNotFound from '../../components/PostingNotFound'
+import {
+    APPLICATION_STATUS,
+    LEVEL_LABELS,
+    STATUS_BORDER,
+    STATUS_LIST,
+    formatDate,
+    initials,
+} from '../../utils/applications'
 
-const STATUSES = [
-    { value: 'SENT', label: 'Испратено', cls: 'bg-slate-100 text-slate-700' },
-    { value: 'REVIEWED', label: 'Прегледано', cls: 'bg-blue-50 text-blue-700' },
-    { value: 'INTERVIEW', label: 'Интервју', cls: 'bg-amber-50 text-amber-700' },
-    { value: 'REJECTED', label: 'Одбиено', cls: 'bg-red-50 text-red-700' },
-    { value: 'ACCEPTED', label: 'Прифатено', cls: 'bg-green-50 text-green-700' },
-]
-const STATUS_BY_VALUE = Object.fromEntries(STATUSES.map((s) => [s.value, s]))
-
-const LEVEL_LABELS = { BEGINNER: 'Почетник', INTERMEDIATE: 'Средно', ADVANCED: 'Напредно' }
-
-const formatDateTime = (iso) => {
-    if (!iso) return ''
-    const d = new Date(iso)
-    const dd = String(d.getDate()).padStart(2, '0')
-    const mm = String(d.getMonth() + 1).padStart(2, '0')
-    return `${dd}.${mm}.${d.getFullYear()}`
+function FilterTile({ label, count, active, onClick }) {
+    return (
+        <button type="button" onClick={onClick}
+                className={`rounded-xl border bg-white p-3 text-left transition ${
+                    active
+                        ? 'border-indigo-600 ring-1 ring-indigo-600'
+                        : 'border-slate-200 hover:border-slate-300'
+                }`}>
+            <p className={`text-2xl font-bold ${count ? 'text-slate-800' : 'text-slate-300'}`}>{count}</p>
+            <p className="text-xs text-slate-500">{label}</p>
+        </button>
+    )
 }
 
 export default function PostingApplications() {
@@ -102,102 +105,126 @@ export default function PostingApplications() {
             <h1 className="mt-2 text-2xl font-bold text-slate-800">Апликации</h1>
             {posting && <p className="mt-1 text-slate-600">{posting.title}</p>}
 
-            {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
-
-            {applications.length > 0 && (
-                <div className="mt-5 flex flex-wrap gap-2 text-sm">
-                    <button onClick={() => setFilter('')}
-                            className={`rounded-full border px-3 py-1 ${
-                                !filter ? 'border-indigo-600 bg-indigo-600 text-white' : 'border-slate-300 text-slate-700 hover:bg-slate-100'
-                            }`}>
-                        Сите ({applications.length})
-                    </button>
-                    {STATUSES.filter((s) => counts[s.value]).map((s) => (
-                        <button key={s.value} onClick={() => setFilter(s.value)}
-                                className={`rounded-full border px-3 py-1 ${
-                                    filter === s.value
-                                        ? 'border-indigo-600 bg-indigo-600 text-white'
-                                        : 'border-slate-300 text-slate-700 hover:bg-slate-100'
-                                }`}>
-                            {s.label} ({counts[s.value]})
-                        </button>
-                    ))}
-                </div>
+            {error && (
+                <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
             )}
 
             {applications.length === 0 ? (
-                <p className="mt-6 text-slate-600">Сè уште нема апликации за овој оглас.</p>
-            ) : (
-                <div className="mt-6 space-y-4">
-                    {visible.map((a) => {
-                        const st = STATUS_BY_VALUE[a.status]
-                        return (
-                            <div key={a.id} className="rounded-xl border border-slate-200 bg-white p-5">
-                                <div className="flex flex-wrap items-start justify-between gap-3">
-                                    <div>
-                                        <h2 className="text-lg font-semibold text-slate-800">{a.studentName}</h2>
-                                        <p className="text-sm text-slate-500">
-                                            {a.studentEmail}
-                                            {a.studentLocation && ` · ${a.studentLocation}`}
-                                            {a.createdAt && ` · Аплицирал: ${formatDateTime(a.createdAt)}`}
-                                        </p>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${st?.cls ?? ''}`}>
-                                            {st?.label ?? a.status}
-                                        </span>
-                                        <select value={a.status} disabled={savingId === a.id}
-                                                onChange={(e) => changeStatus(a, e.target.value)}
-                                                className="rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm focus:border-indigo-500 focus:outline-none disabled:opacity-50">
-                                            {STATUSES.map((s) => (
-                                                <option key={s.value} value={s.value}>{s.label}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                {a.message && (
-                                    <div className="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
-                                        <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-400">
-                                            Порака
-                                        </p>
-                                        <p className="whitespace-pre-line">{a.message}</p>
-                                    </div>
-                                )}
-
-                                {a.studentBio && (
-                                    <p className="mt-3 line-clamp-3 text-sm text-slate-600">{a.studentBio}</p>
-                                )}
-
-                                <div className="mt-3 flex flex-wrap gap-2">
-                                    {a.skills?.length ? (
-                                        a.skills.map((s) => (
-                                            <span key={s.skillId}
-                                                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
-                                                {s.name}
-                                                {s.level && ` · ${LEVEL_LABELS[s.level] ?? s.level}`}
-                                            </span>
-                                        ))
-                                    ) : (
-                                        <span className="text-xs text-slate-400">Нема внесени вештини.</span>
-                                    )}
-                                </div>
-
-                                <div className="mt-4 border-t border-slate-100 pt-3">
-                                    {a.hasCv ? (
-                                        <button type="button" onClick={() => downloadCv(a)}
-                                                disabled={cvBusyId === a.id}
-                                                className="rounded-lg border border-indigo-600 px-4 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50 disabled:opacity-60">
-                                            {cvBusyId === a.id ? 'Се презема...' : 'Преземи CV'}
-                                        </button>
-                                    ) : (
-                                        <span className="text-xs text-slate-400">Нема приложено CV.</span>
-                                    )}
-                                </div>
-                            </div>
-                        )
-                    })}
+                <div className="mt-6 rounded-xl bg-white p-8 text-center shadow">
+                    <p className="font-medium text-slate-800">Сè уште нема апликации за овој оглас</p>
+                    <p className="mt-1 text-sm text-slate-500">
+                        Во меѓувреме можеш да ги погледнеш препорачаните кандидати.
+                    </p>
+                    <Link to={`/company/postings/${id}/candidates`}
+                          className="mt-4 inline-block rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                        Препорачани кандидати
+                    </Link>
                 </div>
+            ) : (
+                <>
+                    <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-6">
+                        <FilterTile label="Сите" count={applications.length} active={!filter}
+                                    onClick={() => setFilter('')} />
+                        {STATUS_LIST.map((s) => (
+                            <FilterTile key={s.value} label={s.label} count={counts[s.value] ?? 0}
+                                        active={filter === s.value}
+                                        onClick={() => setFilter(filter === s.value ? '' : s.value)} />
+                        ))}
+                    </div>
+
+                    <div className="mt-6 space-y-4">
+                        {visible.map((a) => {
+                            const st = APPLICATION_STATUS[a.status]
+                            return (
+                                <div key={a.id}
+                                     className={`rounded-xl border-l-4 bg-white p-5 shadow ${STATUS_BORDER[a.status] ?? 'border-l-slate-300'}`}>
+                                    <div className="flex flex-wrap items-start justify-between gap-3">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700">
+                                                {initials(a.studentName)}
+                                            </div>
+                                            <div>
+                                                <h2 className="text-lg font-semibold leading-tight text-slate-800">
+                                                    {a.studentName}
+                                                </h2>
+                                                <p className="text-sm text-slate-500">
+                                                    {a.studentEmail}
+                                                    {a.studentLocation && ` · ${a.studentLocation}`}
+                                                </p>
+                                                {a.createdAt && (
+                                                    <p className="text-xs text-slate-400">
+                                                        Аплицирал: {formatDate(a.createdAt)}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <span className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${st?.className ?? ''}`}>
+                                                {st?.label ?? a.status}
+                                            </span>
+                                            <select value={a.status} disabled={savingId === a.id}
+                                                    onChange={(e) => changeStatus(a, e.target.value)}
+                                                    aria-label="Промени статус"
+                                                    className="rounded-lg border border-slate-300 bg-white px-2 py-1.5 text-sm focus:border-indigo-500 focus:outline-none disabled:opacity-50">
+                                                {STATUS_LIST.map((s) => (
+                                                    <option key={s.value} value={s.value}>{s.label}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {a.message && (
+                                        <div className="mt-4 rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
+                                            <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-400">
+                                                Порака
+                                            </p>
+                                            <p className="whitespace-pre-line">{a.message}</p>
+                                        </div>
+                                    )}
+
+                                    {a.studentBio && (
+                                        <p className="mt-3 line-clamp-3 text-sm text-slate-600">{a.studentBio}</p>
+                                    )}
+
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        {a.skills?.length ? (
+                                            a.skills.map((s) => (
+                                                <span key={s.skillId}
+                                                      className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs text-slate-700">
+                                                    {s.name}
+                                                    {s.level && ` · ${LEVEL_LABELS[s.level] ?? s.level}`}
+                                                </span>
+                                            ))
+                                        ) : (
+                                            <span className="text-xs text-slate-400">Нема внесени вештини.</span>
+                                        )}
+                                    </div>
+
+                                    <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-slate-100 pt-4">
+                                        {a.hasCv ? (
+                                            <button type="button" onClick={() => downloadCv(a)}
+                                                    disabled={cvBusyId === a.id}
+                                                    className="rounded-lg border border-indigo-600 px-4 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50 disabled:opacity-60">
+                                                {cvBusyId === a.id ? 'Се презема...' : 'Преземи CV'}
+                                            </button>
+                                        ) : (
+                                            <span className="text-xs text-slate-400">Нема приложено CV.</span>
+                                        )}
+                                        {a.studentEmail && (
+                                            <a href={`mailto:${a.studentEmail}`}
+                                               className="rounded-lg border border-slate-300 px-4 py-1.5 text-sm text-slate-700 hover:bg-slate-50">
+                                                Контактирај
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            )
+                        })}
+                        {visible.length === 0 && (
+                            <p className="text-sm text-slate-500">Нема апликации со овој статус.</p>
+                        )}
+                    </div>
+                </>
             )}
         </div>
     )
