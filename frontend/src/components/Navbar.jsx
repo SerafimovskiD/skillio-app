@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { homeFor } from '../utils/routes'
+import ThemeToggle from './ThemeToggle'
 
 const navClass = ({ isActive }) =>
     isActive ? 'font-medium text-indigo-600' : 'text-slate-600 hover:text-indigo-600'
@@ -73,19 +74,24 @@ export default function Navbar() {
                                     className="rounded-lg border border-slate-300 px-3 py-1.5 hover:bg-slate-100">
                                 Одјава
                             </button>
+                            <ThemeToggle />
                         </div>
-                        <button onClick={() => setOpen((v) => !v)} aria-label="Мени"
-                                className="rounded-lg border border-slate-300 px-3 py-1.5 text-lg leading-none md:hidden">
-                            {open ? '✕' : '☰'}
-                        </button>
+                        <div className="flex items-center gap-2 md:hidden">
+                            <button onClick={() => setOpen((v) => !v)} aria-label="Мени"
+                                    className="rounded-lg border border-slate-300 px-3 py-1.5 text-lg leading-none">
+                                {open ? '✕' : '☰'}
+                            </button>
+                            <ThemeToggle />
+                        </div>
                     </>
                 ) : (
-                    <div className="flex gap-3 text-sm">
+                    <div className="flex items-center gap-2 text-sm">
                         <Link to="/login" className="px-3 py-1.5 hover:text-indigo-600">Најава</Link>
                         <Link to="/register"
                               className="rounded-lg bg-indigo-600 px-3 py-1.5 text-white hover:bg-indigo-700">
                             Регистрација
                         </Link>
+                        <ThemeToggle />
                     </div>
                 )}
             </div>

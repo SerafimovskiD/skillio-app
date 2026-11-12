@@ -19,6 +19,18 @@ const EMPTY = {
     deadline: '',
 }
 
+function Section({ title, hint, children }) {
+    return (
+        <section className="space-y-4">
+            <div className="border-b border-slate-100 pb-2">
+                <h2 className="text-base font-semibold text-slate-800">{title}</h2>
+                {hint && <p className="text-xs text-slate-500">{hint}</p>}
+            </div>
+            {children}
+        </section>
+    )
+}
+
 export default function PostingForm() {
     const { id } = useParams()
     const isEdit = Boolean(id)
@@ -134,6 +146,8 @@ export default function PostingForm() {
         return <div className="mx-auto max-w-3xl px-4 py-8 text-slate-500">Се вчитува...</div>
     }
 
+    const requiredCount = selected.filter((s) => s.required).length
+
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
             <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
@@ -142,121 +156,146 @@ export default function PostingForm() {
             <h1 className="mt-2 text-2xl font-bold text-slate-800">
                 {isEdit ? 'Уреди оглас' : 'Нов оглас'}
             </h1>
+            <p className="mt-1 text-sm text-slate-500">
+                Полињата означени со * се задолжителни.
+            </p>
 
-            <form onSubmit={submit} className="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6">
-                <div>
-                    <label className="text-sm font-medium text-slate-700">Наслов *</label>
-                    <input name="title" value={form.title} onChange={change} maxLength={255}
-                           className={inputClass} placeholder="пр. Junior Frontend Developer" />
-                </div>
-
-                <div>
-                    <label className="text-sm font-medium text-slate-700">Опис *</label>
-                    <textarea name="description" value={form.description} onChange={change} rows={9}
-                              className={inputClass}
-                              placeholder="Опиши што ќе работи кандидатот, што барате и што нудите." />
-                </div>
-
-                <div className="grid gap-5 sm:grid-cols-2">
+            <form onSubmit={submit} className="mt-6 space-y-8 rounded-xl bg-white p-6 shadow">
+                <Section title="Основни информации">
                     <div>
-                        <label className="text-sm font-medium text-slate-700">Тип *</label>
-                        <select name="type" value={form.type} onChange={change} className={inputClass}>
-                            {Object.entries(TYPE_LABELS).map(([value, label]) => (
-                                <option key={value} value={value}>{label}</option>
-                            ))}
-                        </select>
+                        <label className="text-sm font-medium text-slate-700">Наслов *</label>
+                        <input name="title" value={form.title} onChange={change} maxLength={255}
+                               className={inputClass} placeholder="пр. Junior Frontend Developer" />
                     </div>
                     <div>
-                        <label className="text-sm font-medium text-slate-700">Начин на работа *</label>
-                        <select name="workMode" value={form.workMode} onChange={change} className={inputClass}>
-                            <option value="">Избери...</option>
-                            {Object.entries(WORK_MODE_LABELS).map(([value, label]) => (
-                                <option key={value} value={value}>{label}</option>
-                            ))}
-                        </select>
+                        <label className="text-sm font-medium text-slate-700">Опис *</label>
+                        <textarea name="description" value={form.description} onChange={change} rows={10}
+                                  className={inputClass}
+                                  placeholder="Опиши што ќе работи кандидатот, што барате и што нудите." />
+                        <p className="mt-1 text-xs text-slate-500">
+                            Совет: подробен опис дава попрецизни препораки. Можеш да користиш листи со „-“.
+                        </p>
                     </div>
-                    <div>
-                        <label className="text-sm font-medium text-slate-700">Област *</label>
-                        <select name="categoryId" value={form.categoryId} onChange={change} className={inputClass}>
-                            <option value="">Избери...</option>
-                            {categories.map((c) => (
-                                <option key={c.id} value={c.id}>{c.name}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="text-sm font-medium text-slate-700">Локација</label>
-                        <input name="location" value={form.location} onChange={change} maxLength={255}
-                               className={inputClass} placeholder="пр. Скопје" />
-                    </div>
-                    <div>
-                        <label className="text-sm font-medium text-slate-700">Краен рок</label>
-                        <input type="date" name="deadline" value={form.deadline} onChange={change}
-                               className={inputClass} />
-                    </div>
-                </div>
+                </Section>
 
-                <div>
-                    <label className="text-sm font-medium text-slate-700">Потребни вештини</label>
-                    <p className="text-xs text-slate-500">
-                        Задолжителните вештини се бројат повеќе при препораките од пожелните.
-                    </p>
+                <Section title="Детали за позицијата">
+                    <div className="grid gap-5 sm:grid-cols-2">
+                        <div>
+                            <label className="text-sm font-medium text-slate-700">Тип *</label>
+                            <select name="type" value={form.type} onChange={change} className={inputClass}>
+                                {Object.entries(TYPE_LABELS).map(([value, label]) => (
+                                    <option key={value} value={value}>{label}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-slate-700">Начин на работа *</label>
+                            <select name="workMode" value={form.workMode} onChange={change} className={inputClass}>
+                                <option value="">Избери...</option>
+                                {Object.entries(WORK_MODE_LABELS).map(([value, label]) => (
+                                    <option key={value} value={value}>{label}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-slate-700">Област *</label>
+                            <select name="categoryId" value={form.categoryId} onChange={change} className={inputClass}>
+                                <option value="">Избери...</option>
+                                {categories.map((c) => (
+                                    <option key={c.id} value={c.id}>{c.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-slate-700">Локација</label>
+                            <input name="location" value={form.location} onChange={change} maxLength={255}
+                                   className={inputClass} placeholder="пр. Скопје" />
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-slate-700">Краен рок за аплицирање</label>
+                            <input type="date" name="deadline" value={form.deadline} onChange={change}
+                                   className={inputClass} />
+                            <p className="mt-1 text-xs text-slate-500">Остави празно ако нема рок.</p>
+                        </div>
+                    </div>
+                </Section>
 
+                <Section title="Потребни вештини"
+                         hint="Задолжителните вештини се бројат повеќе при препораките од пожелните.">
                     {selected.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                            {selected.map((s) => (
-                                <span key={s.skillId}
-                                      className={`inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm ${
-                                          s.required
-                                              ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
-                                              : 'border-slate-200 bg-slate-50 text-slate-600'
-                                      }`}>
-                                    {s.name}
-                                    <button type="button" onClick={() => toggleRequired(s.skillId)}
-                                            className="text-xs underline">
-                                        {s.required ? 'задолжителна' : 'пожелна'}
-                                    </button>
-                                    <button type="button" onClick={() => removeSkill(s.skillId)}
-                                            className="text-slate-400 hover:text-red-600" aria-label="Отстрани">
-                                        ×
-                                    </button>
-                                </span>
-                            ))}
+                        <div>
+                            <p className="mb-2 text-xs text-slate-500">
+                                Избрани: {selected.length} (задолжителни: {requiredCount}). Кликни на ознаката за промена.
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {selected.map((s) => (
+                                    <span key={s.skillId}
+                                          className={`inline-flex items-center gap-1.5 rounded-full border py-1 pl-3 pr-2 text-sm ${
+                                              s.required
+                                                  ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
+                                                  : 'border-slate-200 bg-slate-50 text-slate-700'
+                                          }`}>
+                                        {s.name}
+                                        <button type="button" onClick={() => toggleRequired(s.skillId)}
+                                                title="Промени помеѓу задолжителна и пожелна"
+                                                className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                                                    s.required
+                                                        ? 'bg-indigo-600 text-white'
+                                                        : 'bg-slate-200 text-slate-700'
+                                                }`}>
+                                            {s.required ? 'Задолжителна' : 'Пожелна'}
+                                        </button>
+                                        <button type="button" onClick={() => removeSkill(s.skillId)}
+                                                className="px-1 text-slate-400 hover:text-red-600"
+                                                aria-label="Отстрани">
+                                            ×
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     )}
 
-                    <input value={skillQuery} onChange={(e) => setSkillQuery(e.target.value)}
-                           className={inputClass} placeholder="Барај вештина за додавање..." />
-                    <div className="mt-2 max-h-56 space-y-3 overflow-y-auto rounded-lg border border-slate-200 p-3">
-                        {groups.length === 0 ? (
-                            <span className="text-sm text-slate-400">Нема резултати.</span>
-                        ) : (
-                            groups.map(([category, skills]) => (
-                                <div key={category}>
-                                    <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-400">
-                                        {category}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2">
-                                        {skills.map((s) => (
-                                            <button type="button" key={s.id} onClick={() => addSkill(s)}
-                                                    className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:border-indigo-400 hover:text-indigo-600">
-                                                + {s.name}
-                                            </button>
-                                        ))}
+                    <div>
+                        <input value={skillQuery} onChange={(e) => setSkillQuery(e.target.value)}
+                               className={inputClass} placeholder="Барај вештина за додавање..." />
+                        <div className="mt-2 max-h-56 space-y-3 overflow-y-auto rounded-lg border border-slate-200 p-3">
+                            {groups.length === 0 ? (
+                                <span className="text-sm text-slate-400">Нема резултати.</span>
+                            ) : (
+                                groups.map(([category, skills]) => (
+                                    <div key={category}>
+                                        <p className="mb-1 text-xs font-medium uppercase tracking-wide text-slate-400">
+                                            {category}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {skills.map((s) => (
+                                                <button type="button" key={s.id} onClick={() => addSkill(s)}
+                                                        className="rounded-full border border-slate-300 px-3 py-1 text-sm text-slate-700 hover:border-indigo-400 hover:text-indigo-600">
+                                                    + {s.name}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            ))
-                        )}
+                                ))
+                            )}
+                        </div>
                     </div>
-                </div>
+                </Section>
 
-                <div className="flex items-center gap-4">
+                {error && (
+                    <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
+                )}
+
+                <div className="flex flex-wrap items-center gap-3 border-t border-slate-100 pt-5">
                     <button type="submit" disabled={saving}
                             className="rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50">
                         {saving ? 'Се зачувува...' : isEdit ? 'Зачувај промени' : 'Објави оглас'}
                     </button>
-                    <Link to="/company/postings" className="text-sm text-slate-600 hover:underline">Откажи</Link>
-                    {error && <span className="text-sm text-red-600">{error}</span>}
+                    <Link to="/company/postings"
+                          className="rounded-lg border border-slate-300 px-5 py-2 text-sm text-slate-600 hover:bg-slate-50">
+                        Откажи
+                    </Link>
                 </div>
             </form>
         </div>

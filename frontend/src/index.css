@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/* Темен режим: ја превртуваме палетата (неутрални сиви) */
+/* Темен режим: неутрални сиви + бел акцент наместо лилаво */
+.dark {
+    color-scheme: dark;
+
+    --color-slate-50: #0a0a0a;
+    --color-slate-100: #171717;
+    --color-slate-200: #262626;
+    --color-slate-300: #404040;
+    --color-slate-400: #737373;
+    --color-slate-500: #a3a3a3;
+    --color-slate-600: #d4d4d4;
+    --color-slate-700: #e5e5e5;
+    --color-slate-800: #f5f5f5;
+    --color-slate-900: #fafafa;
+
+    /* акцентот (indigo) станува бел/сив */
+    --color-indigo-50: #262626;
+    --color-indigo-100: #333333;
+    --color-indigo-200: #404040;
+    --color-indigo-300: #737373;
+    --color-indigo-400: #a3a3a3;
+    --color-indigo-500: #d4d4d4;
+    --color-indigo-600: #ffffff;
+    --color-indigo-700: #e5e5e5;
+
+    --color-red-50: #450a0a;
+    --color-red-700: #fca5a5;
+    --color-green-50: #052e16;
+    --color-green-700: #86efac;
+    --color-amber-50: #451a03;
+    --color-amber-700: #fcd34d;
+}
+
+.dark .bg-white {
+    background-color: #171717;
+}
+
+/* белите копчиња добиваат црн текст */
+.dark .bg-indigo-600,
+.dark .hover\:bg-indigo-700:hover {
+    color: #0a0a0a;
+}
+/* линковите со акцентна боја да личат на линкови (светол и темен режим) */
+a.text-indigo-600 {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+header a.text-xl {
+    text-decoration: none;
+}
