@@ -48,7 +48,7 @@
     color: #0a0a0a;
 }
 /* подвлекување само за обични линкови, не и за копчиња и навигација */
-:where(a.text-indigo-600:not([class*="border"]):not([class*="bg-"])) {
+:where(a.text-indigo-600:not([class*="border"]):not([class*="bg-"]):not(.no-underline)) {
     text-decoration: underline;
     text-underline-offset: 3px;
 }

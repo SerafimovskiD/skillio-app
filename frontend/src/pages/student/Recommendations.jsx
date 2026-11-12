@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { getRecommendedPostings } from '../../api/recommendations'
 import { TYPE_LABELS, WORK_MODE_LABELS, formatDate, isExpired } from '../../utils/postings'
 import { scoreStyle, toPercent } from '../../utils/score'
+import PageHeader from '../../components/PageHeader'
+import Typewriter from '../../components/Typewriter'
 
 const MODES = [
     {
@@ -276,6 +278,13 @@ export default function Recommendations() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
 
+    // чекање само додека се пишува насловот; по прв клик на таб паѓа на 0
+    const [hintDelay, setHintDelay] = useState('Препораки за тебе'.length * 45 + 200)
+    const changeMode = (value) => {
+        setHintDelay(0)
+        setMode(value)
+    }
+
     useEffect(() => {
         let ignore = false
         setLoading(true)
@@ -300,11 +309,11 @@ export default function Recommendations() {
 
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-800">Препораки за тебе</h1>
+            <PageHeader title="Препораки за тебе" />
 
             <div className="mt-4 inline-flex rounded-lg border border-slate-200 bg-white p-1 text-sm">
                 {MODES.map((m) => (
-                    <button key={m.value} type="button" onClick={() => setMode(m.value)}
+                    <button key={m.value} type="button" onClick={() => changeMode(m.value)}
                             className={`rounded-md px-3 py-1.5 font-medium ${
                                 mode === m.value
                                     ? 'bg-indigo-600 text-white'
@@ -314,7 +323,15 @@ export default function Recommendations() {
                     </button>
                 ))}
             </div>
-            <p className="mt-2 text-sm text-slate-500">{currentMode.hint}</p>
+            <p className="mt-2 text-sm text-slate-500">
+                {/* key = се пишува одново секогаш кога ќе смениш режим */}
+                <Typewriter
+                    key={mode}
+                    text={currentMode.hint}
+                    speed={12}
+                    delay={hintDelay}
+                />
+            </p>
 
             {allZero && (
                 <div className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">

@@ -7,6 +7,7 @@ import {
     updateApplicationStatus,
 } from '../../api/companyApplications'
 import PostingNotFound from '../../components/PostingNotFound'
+import PageHeader from '../../components/PageHeader'
 import {
     APPLICATION_STATUS,
     LEVEL_LABELS,
@@ -102,8 +103,9 @@ export default function PostingApplications() {
             <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
                 ← Назад кон огласи
             </Link>
-            <h1 className="mt-2 text-2xl font-bold text-slate-800">Апликации</h1>
-            {posting && <p className="mt-1 text-slate-600">{posting.title}</p>}
+            <div className="mt-2">
+                <PageHeader title="Апликации" subtitle={posting?.title} />
+            </div>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>

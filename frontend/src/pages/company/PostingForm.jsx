@@ -5,6 +5,7 @@ import { getAllCategories } from '../../api/interests'
 import { getAllSkills } from '../../api/skills'
 import { TYPE_LABELS, WORK_MODE_LABELS } from '../../utils/postings'
 import PostingNotFound from '../../components/PostingNotFound'
+import PageHeader from '../../components/PageHeader'
 
 const inputClass =
     'mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500'
@@ -150,15 +151,15 @@ export default function PostingForm() {
 
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
-            <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
+            <Link to="/company/postings" className="text-sm text-indigo-600 no-underline">
                 ← Назад кон огласи
             </Link>
-            <h1 className="mt-2 text-2xl font-bold text-slate-800">
-                {isEdit ? 'Уреди оглас' : 'Нов оглас'}
-            </h1>
-            <p className="mt-1 text-sm text-slate-500">
-                Полињата означени со * се задолжителни.
-            </p>
+            <div className="mt-2">
+                <PageHeader
+                    title={isEdit ? 'Уреди оглас' : 'Нов оглас'}
+                    subtitle="Полињата означени со * се задолжителни."
+                />
+            </div>
 
             <form onSubmit={submit} className="mt-6 space-y-8 rounded-xl bg-white p-6 shadow">
                 <Section title="Основни информации">

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {getProfile, updateProfile} from '../../api/profile'
 import {useAuth} from '../../context/AuthContext'
+import PageHeader from '../../components/PageHeader'
 import SkillsSection from '../../components/SkillsSection'
 import InterestsSection from '../../components/InterestsSection'
 import ProjectsSection from '../../components/ProjectsSection'
@@ -56,7 +57,7 @@ export default function Profile() {
 
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-800">Мој профил</h1>
+            <PageHeader title="Мој профил" />
 
             <form onSubmit={onSubmit} className="mt-6 space-y-4 rounded-xl bg-white p-6 shadow">
                 <h2 className="text-lg font-semibold text-slate-800">Основни податоци</h2>

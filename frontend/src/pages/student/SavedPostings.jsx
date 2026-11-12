@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getMySavedPostings, unsavePosting } from '../../api/savedPostings'
 import PostingCard from '../../components/PostingCard'
+import PageHeader from '../../components/PageHeader'
 import { timeAgo } from '../../utils/postings'
 import { plural } from '../../utils/plural'
 
@@ -31,15 +32,11 @@ export default function SavedPostings() {
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Зачувани огласи</h1>
-                    <p className="mt-1 text-slate-600">Огласи што си ги зачувал за подоцна.</p>
-                </div>
+            <PageHeader title="Зачувани огласи" subtitle="Огласи што си ги зачувал за подоцна.">
                 {!loading && items.length > 0 && (
                     <p className="text-sm text-slate-500">{plural(items.length, 'оглас', 'огласи')}</p>
                 )}
-            </div>
+            </PageHeader>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>

@@ -7,13 +7,21 @@ import { getCompanyProfile } from '../../api/companyProfile'
 import { isExpired } from '../../utils/postings'
 import { APPLICATION_STATUS, formatDate, initials } from '../../utils/applications'
 import { plural } from '../../utils/plural'
+import { headerDuration } from '../../utils/typing'
 import StatTile from '../../components/StatTile'
+import PageHeader from '../../components/PageHeader'
 
 const linkBtn =
     'rounded-lg border border-slate-300 px-3 py-1.5 text-slate-700 hover:bg-slate-50'
 
+const SUBTITLE = 'Преглед на огласите и апликациите на твојата компанија.'
+
 export default function Dashboard() {
     const { user } = useAuth()
+    // од кога смеат да почнат да се бројат броевите (по завршување на насловот и поднасловот)
+    const [countStart] = useState(
+        () => Date.now() + headerDuration(`Здраво, ${user.companyName ?? user.name}`, SUBTITLE)
+    )
     const [postings, setPostings] = useState([])
     const [applications, setApplications] = useState([])
     const [profile, setProfile] = useState(null)
@@ -68,18 +76,14 @@ export default function Dashboard() {
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-800">
-                        Здраво, {user.companyName ?? user.name}
-                    </h1>
-                    <p className="mt-1 text-slate-600">Преглед на огласите и апликациите на твојата компанија.</p>
-                </div>
+            <PageHeader
+                title={`Здраво, ${user.companyName ?? user.name}`}
+                subtitle={SUBTITLE}>
                 <Link to="/company/postings/new"
                       className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
                     + Објави оглас
                 </Link>
-            </div>
+            </PageHeader>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
@@ -99,19 +103,22 @@ export default function Dashboard() {
                 <>
                     <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                         <StatTile label="Активни огласи" value={activePostings} icon="document" tone="indigo"
-                                  hint={`од вкупно ${postings.length}`} to="/company/postings" />
-                        <StatTile label="Вкупно апликации" value={applications.length} icon="users" tone="sky" />
+                                  hint={`од вкупно ${postings.length}`} to="/company/postings"
+                                  startAt={countStart} />
+                        <StatTile label="Вкупно апликации" value={applications.length} icon="users" tone="sky"
+                                  startAt={countStart} />
                         <StatTile label="Нови апликации" value={newApplications} icon="bell" tone="amber"
-                                  hint="Со статус „Испратено“" />
-                        <StatTile label="На интервју" value={interviews} icon="check" tone="green" />
+                                  hint="Со статус „Испратено“" startAt={countStart} />
+                        <StatTile label="На интервју" value={interviews} icon="check" tone="green"
+                                  startAt={countStart} />
                     </div>
 
                     <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-5">
                         <section className="min-w-0 rounded-xl bg-white p-6 shadow lg:col-span-3">
                             <div className="flex items-center justify-between">
                                 <h2 className="text-lg font-semibold text-slate-800">Мои огласи</h2>
-                                <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
-                                    Сите →
+                                <Link to="/company/postings" className="text-sm text-indigo-600 no-underline">
+                                    Погледни ги сите
                                 </Link>
                             </div>
 

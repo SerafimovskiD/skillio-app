@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getMyCv, uploadCv, deleteCv, downloadMyCv } from "../api/cv";
+import { useConfirm } from "./ConfirmProvider";
 
 function formatDate(iso) {
     if (!iso) return "";
@@ -9,6 +10,7 @@ function formatDate(iso) {
 }
 
 export default function CvSection() {
+    const confirm = useConfirm();
     const [cv, setCv] = useState(null);
     const [loading, setLoading] = useState(true);
     const [busy, setBusy] = useState(false);
@@ -46,6 +48,13 @@ export default function CvSection() {
     }
 
     async function handleDelete() {
+        const ok = await confirm({
+            title: "Избриши CV",
+            message: "Да го избришам CV-то? Ќе мора повторно да го поставиш ако сакаш да го приложуваш на апликации.",
+            confirmText: "Избриши",
+            danger: true,
+        });
+        if (!ok) return;
         setBusy(true);
         setError("");
         try {

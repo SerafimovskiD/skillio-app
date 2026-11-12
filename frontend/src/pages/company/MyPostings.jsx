@@ -2,7 +2,14 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getMyPostings, deletePosting } from '../../api/companyPostings'
 import { TYPE_LABELS, WORK_MODE_LABELS, daysUntil, formatDate, isExpired } from '../../utils/postings'
-import { plural, pluralWord } from '../../utils/plural'
+import { pluralWord } from '../../utils/plural'
+import PageHeader from '../../components/PageHeader'
+import CountUp from '../../components/CountUp'
+
+const TITLE = 'Мои огласи'
+const SUBTITLE = 'Огласите што си ги објавил како компанија.'
+// колку трае пишувањето на насловот + поднасловот (исти брзини како во PageHeader) + мала пауза
+const COUNTS_DELAY = TITLE.length * 45 + 200 + SUBTITLE.length * 25 + 150
 
 export default function MyPostings() {
     const [postings, setPostings] = useState([])
@@ -10,6 +17,12 @@ export default function MyPostings() {
     const [error, setError] = useState('')
     const [confirmId, setConfirmId] = useState(null)
     const [deletingId, setDeletingId] = useState(null)
+    const [countsReady, setCountsReady] = useState(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => setCountsReady(true), COUNTS_DELAY)
+        return () => clearTimeout(timer)
+    }, [])
 
     useEffect(() => {
         getMyPostings()
@@ -37,22 +50,24 @@ export default function MyPostings() {
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Мои огласи</h1>
-                    {!loading && (
-                        <p className="mt-1 text-sm text-slate-500">
-                            {plural(postings.length, 'оглас', 'огласи')} · {active}{' '}
-                            {pluralWord(active, 'активен', 'активни')} · {expiredCount}{' '}
-                            {pluralWord(expiredCount, 'истечен', 'истечени')}
-                        </p>
-                    )}
-                </div>
+            <PageHeader title={TITLE} subtitle={SUBTITLE}>
                 <Link to="/company/postings/new"
                       className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
                     + Нов оглас
                 </Link>
-            </div>
+            </PageHeader>
+
+            {/* h-5 го држи просторот резервиран додека броевите не се појават */}
+            <p className="mt-2 h-5 text-sm text-slate-500">
+                {!loading && countsReady && (
+                    <>
+                        <CountUp value={postings.length} />{' '}
+                        {pluralWord(postings.length, 'оглас', 'огласи')} · <CountUp value={active} />{' '}
+                        {pluralWord(active, 'активен', 'активни')} · <CountUp value={expiredCount} />{' '}
+                        {pluralWord(expiredCount, 'истечен', 'истечени')}
+                    </>
+                )}
+            </p>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>

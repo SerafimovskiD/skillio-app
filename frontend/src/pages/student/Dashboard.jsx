@@ -10,16 +10,23 @@ import { getRecommendedPostings } from '../../api/recommendations'
 import { getMySavedPostings } from '../../api/savedPostings'
 import { getMySkills } from '../../api/skills'
 import StatTile from '../../components/StatTile'
+import Typewriter from '../../components/Typewriter'
 import { useAuth } from '../../context/AuthContext'
 import { APPLICATION_STATUS } from '../../utils/applications'
 import { timeAgo } from '../../utils/postings'
 import { scoreStyle, toPercent } from '../../utils/score'
+import { headerDuration } from '../../utils/typing'
 
 const val = (result, fallback) => (result.status === 'fulfilled' ? result.value : fallback)
+
+const GREETING_SPEED = 45
+const SUBTITLE = 'Најди пракса или работа што одговара на твоите вештини.'
 
 export default function Dashboard() {
     const { user } = useAuth()
     const [data, setData] = useState(null)
+    // од кога смеат да почнат да се бројат броевите (по завршување на насловот и поднасловот)
+    const [countStart, setCountStart] = useState(0)
 
     useEffect(() => {
         Promise.allSettled([
@@ -32,7 +39,8 @@ export default function Dashboard() {
             getMySavedPostings(),
             getRecommendedPostings('HYBRID', 3),
             getMyCv(),
-        ]).then(([profile, skills, interests, projects, education, applications, saved, recs, cv]) =>
+        ]).then(([profile, skills, interests, projects, education, applications, saved, recs, cv]) => {
+            setCountStart(Date.now() + headerDuration(`Здраво, ${user.name}`, SUBTITLE))
             setData({
                 profile: val(profile, null),
                 skills: val(skills, []),
@@ -44,7 +52,8 @@ export default function Dashboard() {
                 recs: val(recs, []),
                 cv: val(cv, null),
             })
-        )
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (!data) {
@@ -70,13 +79,22 @@ export default function Dashboard() {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 3)
     const answered = applications.filter((a) => a.status !== 'SENT').length
+    const greeting = `Здраво, ${user.name}`
 
     return (
         <div className="mx-auto max-w-5xl px-4 py-8">
             <div className="flex flex-wrap items-end justify-between gap-3">
                 <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Здраво, {user.name}</h1>
-                    <p className="mt-1 text-slate-600">Најди пракса или работа што одговара на твоите вештини.</p>
+                    <h1 className="text-2xl font-bold text-slate-800">
+                        <Typewriter text={greeting} speed={GREETING_SPEED} />
+                    </h1>
+                    <p className="mt-1 text-slate-600">
+                        <Typewriter
+                            text={SUBTITLE}
+                            speed={25}
+                            delay={greeting.length * GREETING_SPEED + 200}
+                        />
+                    </p>
                 </div>
                 <Link to="/student/postings"
                       className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
@@ -86,18 +104,18 @@ export default function Dashboard() {
 
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <StatTile label="Апликации" value={applications.length} to="/student/applications"
-                          icon="send" tone="indigo" />
+                          icon="send" tone="indigo" startAt={countStart} />
                 <StatTile label="Зачувани огласи" value={saved.length} to="/student/saved"
-                          icon="bookmark" tone="amber" />
+                          icon="bookmark" tone="amber" startAt={countStart} />
                 <StatTile label="Одговори од компании" value={answered} to="/student/applications"
-                          icon="check" tone="green" />
+                          icon="check" tone="green" startAt={countStart} />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <section className="rounded-xl bg-white p-6 shadow lg:col-span-2">
                     <div className="flex items-center justify-between">
                         <h2 className="text-lg font-semibold text-slate-800">Препорачани за тебе</h2>
-                        <Link to="/student/recommendations" className="text-sm text-indigo-600 hover:underline">
+                        <Link to="/student/recommendations" className="text-sm text-indigo-600 no-underline">
                             Сите препораки
                         </Link>
                     </div>
@@ -161,7 +179,7 @@ export default function Dashboard() {
             <section className="mt-6 rounded-xl bg-white p-6 shadow">
                 <div className="flex items-center justify-between">
                     <h2 className="text-lg font-semibold text-slate-800">Последни апликации</h2>
-                    <Link to="/student/applications" className="text-sm text-indigo-600 hover:underline">
+                    <Link to="/student/applications" className="text-sm text-indigo-600 no-underline ">
                         Сите апликации
                     </Link>
                 </div>

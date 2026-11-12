@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import CountUp from './CountUp'
 
 const TONES = {
     indigo: 'bg-indigo-50 text-indigo-600',
@@ -30,14 +31,16 @@ function Icon({ name }) {
     }
 }
 
-export default function StatTile({ label, value, hint, to, tone = 'indigo', icon }) {
+export default function StatTile({ label, value, hint, to, tone = 'indigo', icon, startAt }) {
     const content = (
         <div className="flex items-center gap-4">
             <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${TONES[tone]}`}>
                 <Icon name={icon} />
             </div>
             <div className="min-w-0">
-                <p className="text-2xl font-bold leading-tight text-slate-800">{value}</p>
+                <p className="text-2xl font-bold leading-tight text-slate-800">
+                    <CountUp value={value} startAt={startAt} />
+                </p>
                 <p className="text-sm text-slate-600">{label}</p>
                 {hint && <p className="text-xs text-slate-400">{hint}</p>}
             </div>

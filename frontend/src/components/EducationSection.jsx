@@ -5,6 +5,7 @@ import {
     getMyEducation,
     updateEducation,
 } from '../api/education'
+import { useConfirm } from './ConfirmProvider'
 
 const inputClass =
     'w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none'
@@ -26,6 +27,7 @@ const sortEducation = (list) =>
     [...list].sort((a, b) => (b.startDate ?? '').localeCompare(a.startDate ?? ''))
 
 export default function EducationSection() {
+    const confirm = useConfirm()
     const [items, setItems] = useState([])
     const [loading, setLoading] = useState(true)
     const [editingId, setEditingId] = useState(null) // null = затворена форма, 'new' или id
@@ -95,7 +97,13 @@ export default function EducationSection() {
     }
 
     const onDelete = async (item) => {
-        if (!window.confirm(`Да го избришам „${item.institution}“?`)) return
+        const ok = await confirm({
+            title: 'Избриши образование',
+            message: `Да го избришам „${item.institution}“?`,
+            confirmText: 'Избриши',
+            danger: true,
+        })
+        if (!ok) return
         setError('')
         setBusy(true)
         try {

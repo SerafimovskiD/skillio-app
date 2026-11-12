@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createProject, deleteProject, getMyProjects, updateProject } from '../api/projects'
+import { useConfirm } from './ConfirmProvider'
 
 const inputClass =
     'w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-indigo-500 focus:outline-none'
@@ -10,6 +11,7 @@ const emptyForm = { title: '', description: '', link: '' }
 const toHref = (link) => (/^https?:\/\//i.test(link) ? link : `https://${link}`)
 
 export default function ProjectsSection() {
+    const confirm = useConfirm()
     const [projects, setProjects] = useState([])
     const [loading, setLoading] = useState(true)
     const [editingId, setEditingId] = useState(null) // null = формата е затворена, 'new' или id на проект
@@ -69,7 +71,13 @@ export default function ProjectsSection() {
     }
 
     const onDelete = async (p) => {
-        if (!window.confirm(`Да го избришам проектот „${p.title}“?`)) return
+        const ok = await confirm({
+            title: 'Избриши проект',
+            message: `Да го избришам проектот „${p.title}“?`,
+            confirmText: 'Избриши',
+            danger: true,
+        })
+        if (!ok) return
         setError('')
         setBusy(true)
         try {

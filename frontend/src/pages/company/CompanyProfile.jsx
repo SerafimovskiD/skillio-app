@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getCompanyProfile, updateCompanyProfile } from '../../api/companyProfile'
 import { useAuth } from '../../context/AuthContext'
+import PageHeader from '../../components/PageHeader'
 
 const EMPTY = { name: '', description: '', website: '', industry: '', location: '' }
 
@@ -61,8 +62,7 @@ export default function CompanyProfile() {
 
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-800">Профил на компанијата</h1>
-
+            <PageHeader title="Профил на компанијата" />
 
             <form onSubmit={submit} className="mt-6 space-y-6 rounded-xl bg-white p-6 shadow">
                 <div className="space-y-4">

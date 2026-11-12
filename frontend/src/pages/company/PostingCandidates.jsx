@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import { getMyPosting } from '../../api/companyPostings'
 import { getCandidates } from '../../api/companyCandidates'
 import PostingNotFound from '../../components/PostingNotFound'
+import PageHeader from '../../components/PageHeader'
+import Typewriter from '../../components/Typewriter'
 import { scoreStyle } from '../../utils/score'
 import { initials } from '../../utils/applications'
 
@@ -11,6 +13,8 @@ const MODES = [
     { value: 'EMBEDDING', label: 'AI сличност', hint: 'Само семантичка сличност меѓу профилот на кандидатот и огласот.' },
     { value: 'SKILLS', label: 'Вештини', hint: 'Само совпаѓање на вештините побарани во огласот.' },
 ]
+
+const TITLE = 'Препорачани кандидати'
 
 const skillName = (s) => (typeof s === 'string' ? s : s?.name)
 
@@ -25,6 +29,13 @@ export default function PostingCandidates() {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [notFound, setNotFound] = useState(false)
+
+    // чекање само додека се пишуваат насловот и името на огласот; по прв клик на таб паѓа на 0
+    const [hintDelay, setHintDelay] = useState(TITLE.length * 45 + 1100)
+    const changeMode = (value) => {
+        setHintDelay(0)
+        setMode(value)
+    }
 
     useEffect(() => {
         getMyPosting(id)
@@ -59,12 +70,13 @@ export default function PostingCandidates() {
             <Link to="/company/postings" className="text-sm text-indigo-600 hover:underline">
                 ← Назад кон огласи
             </Link>
-            <h1 className="mt-2 text-2xl font-bold text-slate-800">Препорачани кандидати</h1>
-            {posting && <p className="mt-1 text-slate-600">{posting.title}</p>}
+            <div className="mt-2">
+                <PageHeader title={TITLE} subtitle={posting?.title} />
+            </div>
 
             <div className="mt-5 inline-flex rounded-lg border border-slate-200 bg-white p-1 text-sm">
                 {MODES.map((m) => (
-                    <button key={m.value} onClick={() => setMode(m.value)}
+                    <button key={m.value} onClick={() => changeMode(m.value)}
                             className={`rounded-md px-3 py-1.5 ${
                                 mode === m.value ? 'bg-indigo-600 text-white' : 'text-slate-600 hover:bg-slate-100'
                             }`}>
@@ -72,7 +84,10 @@ export default function PostingCandidates() {
                     </button>
                 ))}
             </div>
-            <p className="mt-2 text-sm text-slate-500">{current.hint}</p>
+            <p className="mt-2 text-sm text-slate-500">
+                {/* key = се пишува одново секогаш кога ќе смениш режим */}
+                <Typewriter key={mode} text={current.hint} speed={12} delay={hintDelay} />
+            </p>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>

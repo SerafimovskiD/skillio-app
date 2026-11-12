@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { cancelApplication, getMyApplications } from '../../api/applications'
 import { APPLICATION_STATUS, STATUS_LIST } from '../../utils/applications'
 import { timeAgo } from '../../utils/postings'
-
+import { useConfirm } from '../../components/ConfirmProvider'
+import PageHeader from '../../components/PageHeader'
+import { plural } from '../../utils/plural'
 const BORDER = {
     SENT: 'border-l-slate-300',
     REVIEWED: 'border-l-blue-400',
@@ -67,6 +69,7 @@ function Timeline({ status }) {
 }
 
 export default function Applications() {
+    const confirm = useConfirm()
     const [apps, setApps] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -92,7 +95,13 @@ export default function Applications() {
     const visible = filter ? apps.filter((a) => a.status === filter) : apps
 
     const handleCancel = async (app) => {
-        if (!window.confirm(`Да ја повлечеш апликацијата за „${app.postingTitle}"?`)) return
+        const ok = await confirm({
+            title: 'Повлечи апликација',
+            message: `Да ја повлечеш апликацијата за „${app.postingTitle}“?`,
+            confirmText: 'Повлечи',
+            danger: true,
+        })
+        if (!ok) return
         setError('')
         try {
             await cancelApplication(app.id)
@@ -105,12 +114,13 @@ export default function Applications() {
 
     return (
         <div className="mx-auto max-w-3xl px-4 py-8">
-            <h1 className="text-2xl font-bold text-slate-800">Мои апликации</h1>
-            {!loading && apps.length > 0 && (
-                <p className="mt-1 text-sm text-slate-500">
-                    Вкупно: {apps.length}. Статусот го менува компанијата.
-                </p>
-            )}
+            <PageHeader title="Мои апликации" subtitle="Статусот на апликациите го менува компанијата.">
+                {!loading && apps.length > 0 && (
+                    <p className="text-sm text-slate-500">
+                        {plural(apps.length, 'апликација', 'апликации')}
+                    </p>
+                )}
+            </PageHeader>
 
             {error && (
                 <div className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>
@@ -207,7 +217,7 @@ export default function Applications() {
                             <div className="mt-4 flex gap-3 border-t border-slate-100 pt-4">
                                 <Link to={`/student/postings/${app.postingId}`}
                                       className="rounded-lg border border-indigo-600 px-4 py-1.5 text-sm font-medium text-indigo-600 hover:bg-indigo-50">
-                                    Детали за огласот
+                                    Погледни оглас
                                 </Link>
                                 {app.status === 'SENT' && (
                                     <button type="button" onClick={() => handleCancel(app)}

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { getPostings } from '../../api/postings'
 import { getAllCategories } from '../../api/interests'
 import PostingCard from '../../components/PostingCard'
+import PageHeader from '../../components/PageHeader'
 import { TYPE_LABELS, WORK_MODE_LABELS } from '../../utils/postings'
 import { plural } from '../../utils/plural'
 
@@ -63,17 +64,13 @@ export default function Postings() {
 
     return (
         <div className="mx-auto max-w-6xl px-4 py-8">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-800">Огласи</h1>
-                    <p className="mt-1 text-slate-600">Пракси и работни позиции од компании.</p>
-                </div>
+            <PageHeader title="Огласи" subtitle="Пракси и работни позиции од компании.">
                 {!loading && (
                     <p className="text-sm text-slate-500">
                         {plural(filtered.length, 'оглас', 'огласи')}
                     </p>
                 )}
-            </div>
+            </PageHeader>
 
             <div className="mt-5 flex flex-wrap gap-3 rounded-xl bg-white p-4 shadow">
                 <input value={query} onChange={(e) => setQuery(e.target.value)}
