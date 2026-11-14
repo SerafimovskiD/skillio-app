@@ -1,0 +1,601 @@
+split,chosen_emb,chosen_skill,chosen_cat,test_chosen,test_default,test_best_possible,scope
+0,0.4,0.45,0.15,0.9874,0.9787,0.9942,student->postings
+1,0.4,0.35,0.25,0.9921,0.9775,0.999,student->postings
+2,0.3,0.4,0.3,0.9942,0.9704,0.9942,student->postings
+3,0.4,0.5,0.1,0.9814,0.9753,0.9952,student->postings
+4,0.5,0.35,0.15,0.9863,0.9679,1.0,student->postings
+5,0.4,0.45,0.15,0.9932,0.9748,1.0,student->postings
+6,0.4,0.5,0.1,0.9853,0.9603,0.999,student->postings
+7,0.4,0.5,0.1,0.9805,0.9747,0.9942,student->postings
+8,0.3,0.35,0.35,0.9971,0.9756,0.999,student->postings
+9,0.3,0.35,0.35,0.9971,0.9704,0.999,student->postings
+10,0.4,0.45,0.15,0.9923,0.9704,0.999,student->postings
+11,0.3,0.4,0.3,1.0,0.9784,1.0,student->postings
+12,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+13,0.4,0.35,0.25,0.9931,0.9722,1.0,student->postings
+14,0.5,0.35,0.15,0.9815,0.9673,0.9952,student->postings
+15,0.35,0.45,0.2,0.9925,0.986,0.9942,student->postings
+16,0.35,0.45,0.2,0.9974,0.9743,0.999,student->postings
+17,0.35,0.45,0.2,0.9974,0.9889,0.999,student->postings
+18,0.3,0.4,0.3,0.999,0.9739,0.999,student->postings
+19,0.3,0.4,0.3,0.9942,0.9865,0.9942,student->postings
+20,0.3,0.35,0.35,0.9971,0.9809,0.999,student->postings
+21,0.4,0.5,0.1,0.9863,0.9651,1.0,student->postings
+22,0.4,0.45,0.15,0.9884,0.9846,0.9952,student->postings
+23,0.3,0.4,0.3,1.0,0.9722,1.0,student->postings
+24,0.3,0.35,0.35,0.9923,0.9804,0.9942,student->postings
+25,0.3,0.35,0.35,0.9923,0.9715,0.9942,student->postings
+26,0.3,0.4,0.3,1.0,0.9895,1.0,student->postings
+27,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+28,0.3,0.35,0.35,0.9981,0.9883,1.0,student->postings
+29,0.4,0.5,0.1,0.9863,0.9663,1.0,student->postings
+30,0.35,0.45,0.2,0.9925,0.9825,0.9942,student->postings
+31,0.4,0.5,0.1,0.9853,0.9688,0.999,student->postings
+32,0.4,0.5,0.1,0.9814,0.9753,0.9952,student->postings
+33,0.4,0.45,0.15,0.9932,0.9741,1.0,student->postings
+34,0.3,0.35,0.35,0.9971,0.9783,0.999,student->postings
+35,0.4,0.5,0.1,0.9853,0.9668,0.999,student->postings
+36,0.4,0.5,0.1,0.9805,0.9609,0.9942,student->postings
+37,0.3,0.4,0.3,0.9952,0.9944,0.9952,student->postings
+38,0.4,0.45,0.15,0.9874,0.9698,0.9942,student->postings
+39,0.3,0.35,0.35,0.9981,0.9807,1.0,student->postings
+40,0.45,0.3,0.25,0.9912,0.9834,1.0,student->postings
+41,0.3,0.4,0.3,0.9952,0.9692,0.9952,student->postings
+42,0.45,0.3,0.25,0.9912,0.966,1.0,student->postings
+43,0.3,0.4,0.3,1.0,0.9765,1.0,student->postings
+44,0.45,0.4,0.15,0.9825,0.9757,0.9942,student->postings
+45,0.3,0.35,0.35,0.9971,0.9774,0.999,student->postings
+46,0.35,0.45,0.2,0.9935,0.9669,0.9952,student->postings
+47,0.3,0.4,0.3,0.9942,0.9746,0.9942,student->postings
+48,0.35,0.45,0.2,0.9935,0.9712,0.9952,student->postings
+49,0.3,0.4,0.3,1.0,0.9827,1.0,student->postings
+50,0.4,0.5,0.1,0.9863,0.9821,1.0,student->postings
+51,0.45,0.4,0.15,0.9873,0.9716,0.999,student->postings
+52,0.3,0.4,0.3,1.0,0.9914,1.0,student->postings
+53,0.4,0.35,0.25,0.9931,0.98,1.0,student->postings
+54,0.35,0.45,0.2,0.9925,0.9687,0.9942,student->postings
+55,0.35,0.45,0.2,0.9935,0.9712,0.9952,student->postings
+56,0.3,0.4,0.3,0.9952,0.9902,0.9952,student->postings
+57,0.45,0.4,0.15,0.9873,0.9805,0.999,student->postings
+58,0.4,0.5,0.1,0.9853,0.9769,0.999,student->postings
+59,0.3,0.4,0.3,1.0,0.9729,1.0,student->postings
+60,0.4,0.5,0.1,0.9863,0.9643,1.0,student->postings
+61,0.4,0.45,0.15,0.9923,0.9704,0.999,student->postings
+62,0.3,0.4,0.3,1.0,0.9729,1.0,student->postings
+63,0.35,0.45,0.2,0.9974,0.9847,0.999,student->postings
+64,0.4,0.5,0.1,0.9863,0.9682,1.0,student->postings
+65,0.4,0.5,0.1,0.9814,0.9788,0.9952,student->postings
+66,0.4,0.45,0.15,0.9884,0.9658,0.9952,student->postings
+67,0.4,0.45,0.15,0.9932,0.9764,1.0,student->postings
+68,0.3,0.35,0.35,0.9971,0.9878,0.999,student->postings
+69,0.35,0.45,0.2,0.9925,0.9675,0.9942,student->postings
+70,0.4,0.5,0.1,0.9853,0.9819,0.999,student->postings
+71,0.3,0.35,0.35,0.9971,0.9956,0.999,student->postings
+72,0.3,0.4,0.3,0.999,0.9802,0.999,student->postings
+73,0.35,0.45,0.2,0.9935,0.9692,0.9952,student->postings
+74,0.35,0.45,0.2,0.9974,0.9701,0.999,student->postings
+75,0.3,0.35,0.35,0.9932,0.9654,0.9952,student->postings
+76,0.3,0.4,0.3,0.9952,0.9631,0.9952,student->postings
+77,0.3,0.4,0.3,0.999,0.9883,0.999,student->postings
+78,0.35,0.45,0.2,0.9974,0.9909,0.999,student->postings
+79,0.4,0.5,0.1,0.9863,0.9689,1.0,student->postings
+80,0.3,0.35,0.35,0.9923,0.978,0.9942,student->postings
+81,0.45,0.3,0.25,0.9912,0.9792,1.0,student->postings
+82,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+83,0.3,0.35,0.35,0.9932,0.9732,0.9952,student->postings
+84,0.35,0.45,0.2,0.9935,0.9824,0.9952,student->postings
+85,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+86,0.45,0.3,0.25,0.9902,0.9845,0.999,student->postings
+87,0.4,0.5,0.1,0.9814,0.9765,0.9952,student->postings
+88,0.45,0.3,0.25,0.9902,0.9809,0.999,student->postings
+89,0.3,0.4,0.3,0.9942,0.9711,0.9942,student->postings
+90,0.3,0.4,0.3,0.9942,0.9656,0.9942,student->postings
+91,0.45,0.45,0.1,0.9784,0.9638,0.999,student->postings
+92,0.4,0.5,0.1,0.9853,0.9657,0.999,student->postings
+93,0.3,0.35,0.35,0.9971,0.9727,0.999,student->postings
+94,0.45,0.3,0.25,0.9902,0.9767,0.999,student->postings
+95,0.3,0.35,0.35,0.9981,0.9818,1.0,student->postings
+96,0.3,0.4,0.3,0.9942,0.9787,0.9942,student->postings
+97,0.45,0.3,0.25,0.9912,0.9781,1.0,student->postings
+98,0.3,0.4,0.3,1.0,0.9818,1.0,student->postings
+99,0.3,0.4,0.3,0.999,0.9783,0.999,student->postings
+100,0.35,0.45,0.2,0.9935,0.9843,0.9952,student->postings
+101,0.45,0.45,0.1,0.9736,0.9589,0.9942,student->postings
+102,0.3,0.35,0.35,0.9971,0.9852,0.999,student->postings
+103,0.4,0.5,0.1,0.9863,0.964,1.0,student->postings
+104,0.3,0.35,0.35,0.9981,0.9919,1.0,student->postings
+105,0.3,0.35,0.35,0.9981,0.9919,1.0,student->postings
+106,0.3,0.4,0.3,0.9952,0.9771,0.9952,student->postings
+107,0.3,0.4,0.3,0.999,0.9864,0.999,student->postings
+108,0.4,0.45,0.15,0.9884,0.97,0.9952,student->postings
+109,0.3,0.35,0.35,0.9971,0.9798,0.999,student->postings
+110,0.3,0.35,0.35,0.9981,0.9702,1.0,student->postings
+111,0.3,0.35,0.35,0.9971,0.9816,0.999,student->postings
+112,0.3,0.4,0.3,1.0,0.9819,1.0,student->postings
+113,0.4,0.45,0.15,0.9923,0.9662,0.999,student->postings
+114,0.3,0.35,0.35,0.9971,0.9774,0.999,student->postings
+115,0.3,0.4,0.3,0.999,0.9783,0.999,student->postings
+116,0.4,0.45,0.15,0.9923,0.9758,0.999,student->postings
+117,0.4,0.5,0.1,0.9853,0.9603,0.999,student->postings
+118,0.3,0.35,0.35,0.9971,0.9852,0.999,student->postings
+119,0.3,0.4,0.3,0.9952,0.9804,0.9952,student->postings
+120,0.3,0.4,0.3,0.9942,0.971,0.9942,student->postings
+121,0.3,0.35,0.35,0.9923,0.9787,0.9942,student->postings
+122,0.4,0.5,0.1,0.9805,0.9728,0.9942,student->postings
+123,0.4,0.45,0.15,0.9923,0.9855,0.999,student->postings
+124,0.35,0.45,0.2,0.9925,0.9694,0.9942,student->postings
+125,0.3,0.4,0.3,0.9952,0.97,0.9952,student->postings
+126,0.3,0.35,0.35,0.9923,0.9727,0.9942,student->postings
+127,0.4,0.5,0.1,0.9853,0.9622,0.999,student->postings
+128,0.3,0.4,0.3,1.0,0.9758,1.0,student->postings
+129,0.4,0.5,0.1,0.9814,0.9637,0.9952,student->postings
+130,0.3,0.4,0.3,0.9942,0.9698,0.9942,student->postings
+131,0.4,0.5,0.1,0.9863,0.9689,1.0,student->postings
+132,0.5,0.3,0.2,0.987,0.9697,0.999,student->postings
+133,0.4,0.45,0.15,0.9884,0.97,0.9952,student->postings
+134,0.3,0.35,0.35,0.9971,0.9828,0.999,student->postings
+135,0.45,0.45,0.1,0.9784,0.9769,0.999,student->postings
+136,0.3,0.4,0.3,0.9952,0.986,0.9952,student->postings
+137,0.3,0.4,0.3,0.999,0.9872,0.999,student->postings
+138,0.3,0.35,0.35,0.9923,0.9829,0.9942,student->postings
+139,0.4,0.45,0.15,0.9932,0.9722,1.0,student->postings
+140,0.4,0.5,0.1,0.9863,0.9628,1.0,student->postings
+141,0.4,0.5,0.1,0.9863,0.9817,1.0,student->postings
+142,0.35,0.45,0.2,0.9925,0.9818,0.9942,student->postings
+143,0.3,0.35,0.35,0.9923,0.9673,0.9942,student->postings
+144,0.4,0.45,0.15,0.9932,0.9837,1.0,student->postings
+145,0.4,0.35,0.25,0.9883,0.9751,0.9952,student->postings
+146,0.3,0.4,0.3,0.9942,0.9698,0.9942,student->postings
+147,0.3,0.35,0.35,0.9932,0.9723,0.9952,student->postings
+148,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+149,0.3,0.4,0.3,0.9952,0.9831,0.9952,student->postings
+150,0.3,0.4,0.3,1.0,0.9699,1.0,student->postings
+151,0.3,0.4,0.3,1.0,0.9981,1.0,student->postings
+152,0.3,0.4,0.3,0.999,0.9724,0.999,student->postings
+153,0.4,0.35,0.25,0.9931,0.98,1.0,student->postings
+154,0.3,0.35,0.35,0.9981,0.9687,1.0,student->postings
+155,0.3,0.4,0.3,0.999,0.9897,0.999,student->postings
+156,0.4,0.5,0.1,0.9814,0.9745,0.9952,student->postings
+157,0.4,0.5,0.1,0.9863,0.9801,1.0,student->postings
+158,0.3,0.35,0.35,0.9981,0.9752,1.0,student->postings
+159,0.3,0.4,0.3,0.999,0.9704,0.999,student->postings
+160,0.4,0.35,0.25,0.9921,0.9775,0.999,student->postings
+161,0.4,0.45,0.15,0.9874,0.9841,0.9942,student->postings
+162,0.3,0.4,0.3,0.9952,0.9715,0.9952,student->postings
+163,0.35,0.45,0.2,0.9935,0.9677,0.9952,student->postings
+164,0.3,0.4,0.3,0.9942,0.9711,0.9942,student->postings
+165,0.3,0.35,0.35,0.9971,0.9859,0.999,student->postings
+166,0.3,0.35,0.35,0.9923,0.9691,0.9942,student->postings
+167,0.45,0.4,0.15,0.9825,0.9799,0.9942,student->postings
+168,0.3,0.35,0.35,0.9932,0.9704,0.9952,student->postings
+169,0.4,0.45,0.15,0.9874,0.9806,0.9942,student->postings
+170,0.4,0.5,0.1,0.9863,0.967,1.0,student->postings
+171,0.3,0.35,0.35,0.9981,0.9807,1.0,student->postings
+172,0.45,0.4,0.15,0.9873,0.9805,0.999,student->postings
+173,0.4,0.5,0.1,0.9805,0.9763,0.9942,student->postings
+174,0.3,0.35,0.35,0.9932,0.9827,0.9952,student->postings
+175,0.35,0.45,0.2,0.9935,0.9801,0.9952,student->postings
+176,0.3,0.35,0.35,0.9923,0.975,0.9942,student->postings
+177,0.4,0.5,0.1,0.9805,0.9574,0.9942,student->postings
+178,0.3,0.35,0.35,0.9981,0.9912,1.0,student->postings
+179,0.3,0.35,0.35,0.9932,0.9793,0.9952,student->postings
+180,0.3,0.35,0.35,0.9971,0.9685,0.999,student->postings
+181,0.35,0.45,0.2,0.9974,0.9847,0.999,student->postings
+182,0.35,0.45,0.2,0.9935,0.9781,0.9952,student->postings
+183,0.35,0.45,0.2,0.9925,0.9717,0.9942,student->postings
+184,0.35,0.45,0.2,0.9935,0.9873,0.9952,student->postings
+185,0.4,0.5,0.1,0.9863,0.9813,1.0,student->postings
+186,0.35,0.45,0.2,0.9974,0.9724,0.999,student->postings
+187,0.3,0.35,0.35,0.9923,0.9769,0.9942,student->postings
+188,0.4,0.35,0.25,0.9883,0.9709,0.9952,student->postings
+189,0.3,0.4,0.3,0.999,0.9733,0.999,student->postings
+190,0.3,0.35,0.35,0.9981,0.9746,1.0,student->postings
+191,0.3,0.4,0.3,0.9942,0.9625,0.9942,student->postings
+192,0.4,0.5,0.1,0.9853,0.9626,0.999,student->postings
+193,0.3,0.4,0.3,0.999,0.9793,0.999,student->postings
+194,0.5,0.35,0.15,0.9815,0.9804,0.9952,student->postings
+195,0.3,0.35,0.35,0.9923,0.9698,0.9942,student->postings
+196,0.3,0.4,0.3,0.9942,0.9816,0.9942,student->postings
+197,0.4,0.5,0.1,0.9863,0.9801,1.0,student->postings
+198,0.3,0.35,0.35,0.9932,0.9793,0.9952,student->postings
+199,0.35,0.45,0.2,0.9925,0.9717,0.9942,student->postings
+0,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+1,0.6,0.3,0.1,0.9759,0.9759,0.988,posting->candidates
+2,0.55,0.25,0.2,0.9857,0.9781,0.9883,posting->candidates
+3,0.3,0.4,0.3,0.988,0.988,0.988,posting->candidates
+4,0.55,0.25,0.2,0.9884,0.9809,0.9911,posting->candidates
+5,0.5,0.3,0.2,0.9951,0.9867,0.9969,posting->candidates
+6,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+7,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+8,0.55,0.25,0.2,0.9884,0.9809,0.9911,posting->candidates
+9,0.55,0.3,0.15,0.9843,0.9843,0.988,posting->candidates
+10,0.35,0.45,0.2,0.9807,0.9807,0.9825,posting->candidates
+11,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+12,0.35,0.45,0.2,0.9951,0.9951,0.9969,posting->candidates
+13,0.5,0.3,0.2,0.9896,0.9896,0.9914,posting->candidates
+14,0.3,0.4,0.3,0.9794,0.971,0.9794,posting->candidates
+15,0.35,0.45,0.2,0.9893,0.9893,0.9911,posting->candidates
+16,0.5,0.3,0.2,0.9807,0.9807,0.9825,posting->candidates
+17,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+18,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+19,0.4,0.5,0.1,0.9738,0.9781,0.9883,posting->candidates
+20,0.55,0.25,0.2,0.9884,0.9893,0.9911,posting->candidates
+21,0.55,0.25,0.2,0.9942,0.9867,0.9969,posting->candidates
+22,0.3,0.4,0.3,0.9883,0.9883,0.9883,posting->candidates
+23,0.3,0.4,0.3,0.9969,0.9969,0.9969,posting->candidates
+24,0.5,0.3,0.2,0.9776,0.9776,0.9794,posting->candidates
+25,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+26,0.35,0.45,0.2,0.9861,0.9861,0.988,posting->candidates
+27,0.3,0.4,0.3,0.988,0.9795,0.988,posting->candidates
+28,0.5,0.3,0.2,0.9776,0.9692,0.9794,posting->candidates
+29,0.35,0.45,0.2,0.9896,0.9896,0.9914,posting->candidates
+30,0.4,0.5,0.1,0.9735,0.9777,0.988,posting->candidates
+31,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+32,0.5,0.3,0.2,0.9776,0.9692,0.9794,posting->candidates
+33,0.6,0.3,0.1,0.988,0.988,1.0,posting->candidates
+34,0.5,0.3,0.2,0.9893,0.9809,0.9911,posting->candidates
+35,0.35,0.45,0.2,0.9951,0.9951,0.9969,posting->candidates
+36,0.4,0.5,0.1,0.9738,0.9781,0.9883,posting->candidates
+37,0.6,0.3,0.1,0.9794,0.9794,0.9914,posting->candidates
+38,0.5,0.3,0.2,0.9861,0.9777,0.988,posting->candidates
+39,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+40,0.55,0.25,0.2,0.9857,0.9865,0.9883,posting->candidates
+41,0.6,0.3,0.1,0.988,0.988,1.0,posting->candidates
+42,0.55,0.25,0.2,0.9857,0.9781,0.9883,posting->candidates
+43,0.35,0.45,0.2,0.9982,0.9898,1.0,posting->candidates
+44,0.55,0.25,0.2,0.9884,0.9809,0.9911,posting->candidates
+45,0.35,0.45,0.2,0.9865,0.9865,0.9883,posting->candidates
+46,0.4,0.5,0.1,0.9649,0.9692,0.9794,posting->candidates
+47,0.55,0.3,0.15,0.9875,0.9875,0.9911,posting->candidates
+48,0.55,0.25,0.2,0.9888,0.9896,0.9914,posting->candidates
+49,0.4,0.5,0.1,0.9649,0.9692,0.9794,posting->candidates
+50,0.3,0.4,0.3,0.988,0.988,0.988,posting->candidates
+51,0.3,0.4,0.3,0.9914,0.983,0.9914,posting->candidates
+52,0.3,0.4,0.3,1.0,1.0,1.0,posting->candidates
+53,0.5,0.3,0.2,0.9893,0.9809,0.9911,posting->candidates
+54,0.55,0.25,0.2,0.9853,0.9861,0.988,posting->candidates
+55,0.55,0.3,0.15,0.9933,0.9933,0.9969,posting->candidates
+56,0.5,0.3,0.2,0.9776,0.9776,0.9794,posting->candidates
+57,0.55,0.3,0.15,0.9933,0.9933,0.9969,posting->candidates
+58,0.35,0.45,0.2,0.9896,0.9896,0.9914,posting->candidates
+59,0.5,0.3,0.2,0.9893,0.9809,0.9911,posting->candidates
+60,0.55,0.3,0.15,0.9847,0.9847,0.9883,posting->candidates
+61,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+62,0.55,0.25,0.2,0.9884,0.9809,0.9911,posting->candidates
+63,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+64,0.55,0.25,0.2,0.9857,0.9781,0.9883,posting->candidates
+65,0.3,0.4,0.3,0.9794,0.971,0.9794,posting->candidates
+66,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+67,0.3,0.4,0.3,0.9794,0.9794,0.9794,posting->candidates
+68,0.6,0.3,0.1,0.9849,0.9849,0.9969,posting->candidates
+69,0.3,0.4,0.3,1.0,0.9916,1.0,posting->candidates
+70,0.3,0.4,0.3,0.9969,0.9885,0.9969,posting->candidates
+71,0.3,0.4,0.3,0.9911,0.9911,0.9911,posting->candidates
+72,0.3,0.4,0.3,1.0,0.9916,1.0,posting->candidates
+73,0.35,0.45,0.2,0.9951,0.9951,0.9969,posting->candidates
+74,0.35,0.45,0.2,0.9865,0.9865,0.9883,posting->candidates
+75,0.35,0.45,0.2,0.9776,0.9776,0.9794,posting->candidates
+76,0.3,0.4,0.3,0.988,0.9795,0.988,posting->candidates
+77,0.4,0.5,0.1,0.9649,0.9692,0.9794,posting->candidates
+78,0.35,0.45,0.2,0.9893,0.9809,0.9911,posting->candidates
+79,0.4,0.5,0.1,0.9738,0.9781,0.9883,posting->candidates
+80,0.5,0.3,0.2,0.9807,0.9723,0.9825,posting->candidates
+81,0.3,0.4,0.3,0.9794,0.971,0.9794,posting->candidates
+82,0.5,0.3,0.2,0.9951,0.9867,0.9969,posting->candidates
+83,0.3,0.4,0.3,0.9794,0.971,0.9794,posting->candidates
+84,0.35,0.45,0.2,0.9807,0.9807,0.9825,posting->candidates
+85,0.6,0.3,0.1,0.9794,0.9794,0.9914,posting->candidates
+86,0.5,0.3,0.2,0.9807,0.9723,0.9825,posting->candidates
+87,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+88,0.5,0.3,0.2,0.9776,0.9776,0.9794,posting->candidates
+89,0.6,0.3,0.1,0.9791,0.9791,0.9911,posting->candidates
+90,0.6,0.3,0.1,0.9759,0.9759,0.988,posting->candidates
+91,0.55,0.25,0.2,0.9857,0.9865,0.9883,posting->candidates
+92,0.6,0.3,0.1,0.9759,0.9759,0.988,posting->candidates
+93,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+94,0.3,0.4,0.3,0.9883,0.9883,0.9883,posting->candidates
+95,0.3,0.4,0.3,0.988,0.988,0.988,posting->candidates
+96,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+97,0.55,0.25,0.2,0.9888,0.9896,0.9914,posting->candidates
+98,0.3,0.4,0.3,0.9794,0.971,0.9794,posting->candidates
+99,0.55,0.3,0.15,0.9758,0.9758,0.9794,posting->candidates
+100,0.55,0.3,0.15,0.9875,0.9875,0.9911,posting->candidates
+101,0.6,0.3,0.1,0.988,0.988,1.0,posting->candidates
+102,0.3,0.4,0.3,1.0,0.9916,1.0,posting->candidates
+103,0.5,0.3,0.2,0.9807,0.9723,0.9825,posting->candidates
+104,0.6,0.3,0.1,0.9794,0.9794,0.9914,posting->candidates
+105,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+106,0.35,0.45,0.2,0.9865,0.9865,0.9883,posting->candidates
+107,0.3,0.4,0.3,0.9883,0.9799,0.9883,posting->candidates
+108,0.5,0.3,0.2,0.9807,0.9807,0.9825,posting->candidates
+109,0.5,0.3,0.2,0.9896,0.9896,0.9914,posting->candidates
+110,0.6,0.3,0.1,0.9763,0.9763,0.9883,posting->candidates
+111,0.3,0.4,0.3,0.9969,0.9885,0.9969,posting->candidates
+112,0.35,0.45,0.2,0.9982,0.9982,1.0,posting->candidates
+113,0.55,0.3,0.15,0.9875,0.9875,0.9911,posting->candidates
+114,0.5,0.3,0.2,0.9807,0.9807,0.9825,posting->candidates
+115,0.3,0.4,0.3,0.9883,0.9799,0.9883,posting->candidates
+116,0.55,0.3,0.15,0.9878,0.9878,0.9914,posting->candidates
+117,0.3,0.4,0.3,0.9914,0.983,0.9914,posting->candidates
+118,0.5,0.3,0.2,0.9982,0.9982,1.0,posting->candidates
+119,0.35,0.45,0.2,0.9807,0.9807,0.9825,posting->candidates
+120,0.55,0.3,0.15,0.9847,0.9847,0.9883,posting->candidates
+121,0.3,0.4,0.3,0.9883,0.9799,0.9883,posting->candidates
+122,0.55,0.25,0.2,0.9974,0.9982,1.0,posting->candidates
+123,0.5,0.3,0.2,0.9807,0.9807,0.9825,posting->candidates
+124,0.3,0.4,0.3,0.9794,0.9794,0.9794,posting->candidates
+125,0.55,0.3,0.15,0.9878,0.9878,0.9914,posting->candidates
+126,0.55,0.3,0.15,0.9758,0.9758,0.9794,posting->candidates
+127,0.35,0.45,0.2,0.9982,0.9898,1.0,posting->candidates
+128,0.35,0.45,0.2,0.9896,0.9896,0.9914,posting->candidates
+129,0.35,0.45,0.2,0.9807,0.9807,0.9825,posting->candidates
+130,0.3,0.4,0.3,0.9911,0.9911,0.9911,posting->candidates
+131,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+132,0.35,0.45,0.2,0.9982,0.9898,1.0,posting->candidates
+133,0.5,0.3,0.2,0.9865,0.9781,0.9883,posting->candidates
+134,0.55,0.25,0.2,0.9798,0.9807,0.9825,posting->candidates
+135,0.3,0.4,0.3,0.9883,0.9883,0.9883,posting->candidates
+136,0.55,0.3,0.15,0.9933,0.9933,0.9969,posting->candidates
+137,0.3,0.4,0.3,0.9914,0.983,0.9914,posting->candidates
+138,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+139,0.3,0.4,0.3,0.988,0.988,0.988,posting->candidates
+140,0.35,0.45,0.2,0.9776,0.9776,0.9794,posting->candidates
+141,0.3,0.4,0.3,0.988,0.9795,0.988,posting->candidates
+142,0.35,0.45,0.2,0.9982,0.9898,1.0,posting->candidates
+143,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+144,0.6,0.3,0.1,0.9791,0.9791,0.9911,posting->candidates
+145,0.35,0.45,0.2,0.9807,0.9723,0.9825,posting->candidates
+146,0.55,0.3,0.15,0.9878,0.9878,0.9914,posting->candidates
+147,0.55,0.3,0.15,0.9878,0.9878,0.9914,posting->candidates
+148,0.35,0.45,0.2,0.9893,0.9893,0.9911,posting->candidates
+149,0.3,0.4,0.3,0.988,0.9795,0.988,posting->candidates
+150,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+151,0.3,0.4,0.3,1.0,0.9916,1.0,posting->candidates
+152,0.35,0.45,0.2,0.9865,0.9865,0.9883,posting->candidates
+153,0.55,0.25,0.2,0.9942,0.9951,0.9969,posting->candidates
+154,0.55,0.25,0.2,0.9798,0.9807,0.9825,posting->candidates
+155,0.5,0.3,0.2,0.9893,0.9893,0.9911,posting->candidates
+156,0.5,0.3,0.2,0.9807,0.9807,0.9825,posting->candidates
+157,0.6,0.3,0.1,0.9759,0.9759,0.988,posting->candidates
+158,0.6,0.3,0.1,0.988,0.988,1.0,posting->candidates
+159,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+160,0.6,0.3,0.1,0.9674,0.9674,0.9794,posting->candidates
+161,0.35,0.45,0.2,0.9893,0.9809,0.9911,posting->candidates
+162,0.55,0.3,0.15,0.9789,0.9789,0.9825,posting->candidates
+163,0.55,0.25,0.2,0.9942,0.9867,0.9969,posting->candidates
+164,0.5,0.3,0.2,0.9893,0.9893,0.9911,posting->candidates
+165,0.5,0.3,0.2,0.9893,0.9893,0.9911,posting->candidates
+166,0.5,0.3,0.2,0.9776,0.9776,0.9794,posting->candidates
+167,0.3,0.4,0.3,0.9914,0.9914,0.9914,posting->candidates
+168,0.55,0.25,0.2,0.9888,0.9896,0.9914,posting->candidates
+169,0.3,0.4,0.3,0.9914,0.9914,0.9914,posting->candidates
+170,0.55,0.25,0.2,0.9974,0.9982,1.0,posting->candidates
+171,0.55,0.3,0.15,0.9964,0.9964,1.0,posting->candidates
+172,0.3,0.4,0.3,0.9969,0.9885,0.9969,posting->candidates
+173,0.3,0.4,0.3,0.9825,0.9741,0.9825,posting->candidates
+174,0.3,0.4,0.3,0.9883,0.9799,0.9883,posting->candidates
+175,0.3,0.4,0.3,0.9825,0.9741,0.9825,posting->candidates
+176,0.4,0.5,0.1,0.9735,0.9777,0.988,posting->candidates
+177,0.6,0.3,0.1,0.9705,0.9705,0.9825,posting->candidates
+178,0.55,0.3,0.15,0.9847,0.9847,0.9883,posting->candidates
+179,0.55,0.3,0.15,0.9933,0.9933,0.9969,posting->candidates
+180,0.55,0.3,0.15,0.9758,0.9758,0.9794,posting->candidates
+181,0.3,0.4,0.3,0.9825,0.9825,0.9825,posting->candidates
+182,0.6,0.3,0.1,0.9674,0.9674,0.9794,posting->candidates
+183,0.3,0.4,0.3,0.9969,0.9969,0.9969,posting->candidates
+184,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+185,0.55,0.3,0.15,0.9878,0.9878,0.9914,posting->candidates
+186,0.3,0.4,0.3,0.9914,0.9914,0.9914,posting->candidates
+187,0.3,0.4,0.3,0.9825,0.9741,0.9825,posting->candidates
+188,0.4,0.5,0.1,0.9824,0.9867,0.9969,posting->candidates
+189,0.55,0.25,0.2,0.9798,0.9807,0.9825,posting->candidates
+190,0.5,0.3,0.2,0.9776,0.9692,0.9794,posting->candidates
+191,0.6,0.3,0.1,0.9849,0.9849,0.9969,posting->candidates
+192,0.35,0.45,0.2,0.9861,0.9861,0.988,posting->candidates
+193,0.55,0.25,0.2,0.9942,0.9951,0.9969,posting->candidates
+194,0.5,0.3,0.2,0.9861,0.9777,0.988,posting->candidates
+195,0.55,0.25,0.2,0.9888,0.9896,0.9914,posting->candidates
+196,0.3,0.4,0.3,1.0,0.9916,1.0,posting->candidates
+197,0.35,0.45,0.2,0.9861,0.9861,0.988,posting->candidates
+198,0.3,0.4,0.3,0.9969,0.9885,0.9969,posting->candidates
+199,0.35,0.45,0.2,0.9896,0.9812,0.9914,posting->candidates
+0,0.3,0.4,0.3,0.9941,0.9795,0.9941,shared weights (both directions)
+1,0.3,0.35,0.35,0.9932,0.9819,0.9951,shared weights (both directions)
+2,0.3,0.4,0.3,0.9984,0.9838,0.9984,shared weights (both directions)
+3,0.3,0.4,0.3,0.9912,0.9796,0.9912,shared weights (both directions)
+4,0.3,0.4,0.3,0.9897,0.975,0.9897,shared weights (both directions)
+5,0.3,0.4,0.3,0.9911,0.9785,0.9911,shared weights (both directions)
+6,0.3,0.4,0.3,0.9912,0.9792,0.9912,shared weights (both directions)
+7,0.35,0.45,0.2,0.989,0.9813,0.9908,shared weights (both directions)
+8,0.3,0.4,0.3,0.9916,0.9783,0.9916,shared weights (both directions)
+9,0.35,0.4,0.25,0.9928,0.9854,0.9955,shared weights (both directions)
+10,0.3,0.4,0.3,0.9955,0.9846,0.9955,shared weights (both directions)
+11,0.3,0.4,0.3,0.9955,0.9846,0.9955,shared weights (both directions)
+12,0.35,0.45,0.2,0.9895,0.9773,0.9912,shared weights (both directions)
+13,0.3,0.4,0.3,0.9868,0.9713,0.9868,shared weights (both directions)
+14,0.3,0.4,0.3,0.9926,0.9729,0.9926,shared weights (both directions)
+15,0.3,0.4,0.3,0.9976,0.9894,0.9976,shared weights (both directions)
+16,0.35,0.45,0.2,0.9871,0.9673,0.9888,shared weights (both directions)
+17,0.4,0.45,0.15,0.9845,0.9714,0.9897,shared weights (both directions)
+18,0.3,0.4,0.3,1.0,0.9789,1.0,shared weights (both directions)
+19,0.35,0.45,0.2,0.9938,0.9827,0.9955,shared weights (both directions)
+20,0.35,0.4,0.25,0.9888,0.9739,0.9916,shared weights (both directions)
+21,0.35,0.4,0.25,0.9933,0.9873,0.996,shared weights (both directions)
+22,0.35,0.45,0.2,0.9855,0.9708,0.9873,shared weights (both directions)
+23,0.3,0.4,0.3,0.9984,0.9747,0.9984,shared weights (both directions)
+24,0.3,0.4,0.3,0.994,0.9813,0.994,shared weights (both directions)
+25,0.3,0.4,0.3,0.9951,0.978,0.9951,shared weights (both directions)
+26,0.3,0.4,0.3,0.9908,0.984,0.9908,shared weights (both directions)
+27,0.3,0.4,0.3,0.9951,0.9825,0.9951,shared weights (both directions)
+28,0.35,0.45,0.2,0.9933,0.9804,0.9951,shared weights (both directions)
+29,0.3,0.4,0.3,0.9883,0.9767,0.9883,shared weights (both directions)
+30,0.45,0.3,0.25,0.9902,0.9853,0.9955,shared weights (both directions)
+31,0.3,0.4,0.3,0.9995,0.9873,0.9995,shared weights (both directions)
+32,0.35,0.45,0.2,0.9911,0.978,0.9928,shared weights (both directions)
+33,0.3,0.4,0.3,0.9917,0.9785,0.9917,shared weights (both directions)
+34,0.3,0.35,0.35,0.9977,0.9852,0.9995,shared weights (both directions)
+35,0.3,0.4,0.3,0.9955,0.9778,0.9955,shared weights (both directions)
+36,0.3,0.35,0.35,0.9977,0.9801,0.9995,shared weights (both directions)
+37,0.3,0.35,0.35,0.9981,0.9921,1.0,shared weights (both directions)
+38,0.3,0.4,0.3,0.9971,0.99,0.9971,shared weights (both directions)
+39,0.3,0.4,0.3,0.9955,0.9837,0.9955,shared weights (both directions)
+40,0.35,0.45,0.2,0.9895,0.9766,0.9912,shared weights (both directions)
+41,0.3,0.4,0.3,0.9976,0.9828,0.9976,shared weights (both directions)
+42,0.3,0.4,0.3,0.9883,0.9817,0.9883,shared weights (both directions)
+43,0.3,0.4,0.3,0.9873,0.9821,0.9873,shared weights (both directions)
+44,0.3,0.4,0.3,0.9868,0.9727,0.9868,shared weights (both directions)
+45,0.3,0.4,0.3,0.9873,0.9723,0.9873,shared weights (both directions)
+46,0.3,0.4,0.3,0.9883,0.971,0.9883,shared weights (both directions)
+47,0.35,0.45,0.2,0.9938,0.9786,0.9955,shared weights (both directions)
+48,0.4,0.35,0.25,0.9896,0.9719,0.994,shared weights (both directions)
+49,0.3,0.35,0.35,0.9865,0.9746,0.9883,shared weights (both directions)
+50,0.35,0.4,0.25,0.9914,0.9747,0.9941,shared weights (both directions)
+51,0.3,0.4,0.3,0.9931,0.9818,0.9931,shared weights (both directions)
+52,0.3,0.4,0.3,0.9917,0.9727,0.9917,shared weights (both directions)
+53,0.3,0.35,0.35,0.9889,0.9786,0.9908,shared weights (both directions)
+54,0.3,0.4,0.3,0.994,0.9719,0.994,shared weights (both directions)
+55,0.45,0.3,0.25,0.9862,0.9781,0.9916,shared weights (both directions)
+56,0.3,0.35,0.35,0.9894,0.977,0.9912,shared weights (both directions)
+57,0.35,0.45,0.2,0.9871,0.977,0.9888,shared weights (both directions)
+58,0.3,0.4,0.3,0.9935,0.9741,0.9935,shared weights (both directions)
+59,0.3,0.4,0.3,0.9873,0.9728,0.9873,shared weights (both directions)
+60,0.3,0.4,0.3,0.9873,0.974,0.9873,shared weights (both directions)
+61,0.3,0.4,0.3,0.998,0.9894,0.998,shared weights (both directions)
+62,0.3,0.4,0.3,0.9935,0.9782,0.9935,shared weights (both directions)
+63,0.3,0.4,0.3,0.9984,0.9854,0.9984,shared weights (both directions)
+64,0.3,0.4,0.3,0.9951,0.9878,0.9951,shared weights (both directions)
+65,0.3,0.4,0.3,0.9917,0.9749,0.9917,shared weights (both directions)
+66,0.3,0.4,0.3,0.9957,0.9848,0.9957,shared weights (both directions)
+67,0.3,0.4,0.3,0.9897,0.979,0.9897,shared weights (both directions)
+68,0.3,0.4,0.3,0.9868,0.9701,0.9868,shared weights (both directions)
+69,0.35,0.45,0.2,0.9875,0.9777,0.9892,shared weights (both directions)
+70,0.3,0.4,0.3,0.9951,0.9796,0.9951,shared weights (both directions)
+71,0.3,0.4,0.3,0.9952,0.9836,0.9952,shared weights (both directions)
+72,0.3,0.4,0.3,0.9912,0.9745,0.9912,shared weights (both directions)
+73,0.45,0.3,0.25,0.988,0.9763,0.9933,shared weights (both directions)
+74,0.3,0.4,0.3,0.9912,0.9836,0.9912,shared weights (both directions)
+75,0.4,0.45,0.15,0.9879,0.9839,0.9931,shared weights (both directions)
+76,0.4,0.5,0.1,0.9771,0.9772,0.9912,shared weights (both directions)
+77,0.3,0.4,0.3,0.9955,0.9767,0.9955,shared weights (both directions)
+78,0.3,0.4,0.3,0.9951,0.9858,0.9951,shared weights (both directions)
+79,0.3,0.4,0.3,0.9926,0.978,0.9926,shared weights (both directions)
+80,0.3,0.4,0.3,0.9912,0.9788,0.9912,shared weights (both directions)
+81,0.3,0.4,0.3,0.9931,0.9801,0.9931,shared weights (both directions)
+82,0.3,0.4,0.3,0.9908,0.9797,0.9908,shared weights (both directions)
+83,0.3,0.4,0.3,0.9935,0.9845,0.9935,shared weights (both directions)
+84,0.3,0.35,0.35,0.9899,0.9773,0.9917,shared weights (both directions)
+85,0.3,0.4,0.3,0.9984,0.9828,0.9984,shared weights (both directions)
+86,0.3,0.4,0.3,0.9868,0.9731,0.9868,shared weights (both directions)
+87,0.3,0.4,0.3,0.9917,0.9788,0.9917,shared weights (both directions)
+88,0.3,0.4,0.3,0.9912,0.9815,0.9912,shared weights (both directions)
+89,0.3,0.4,0.3,0.9912,0.9697,0.9912,shared weights (both directions)
+90,0.3,0.4,0.3,0.9888,0.9773,0.9888,shared weights (both directions)
+91,0.35,0.45,0.2,0.9958,0.976,0.9976,shared weights (both directions)
+92,0.4,0.45,0.15,0.9924,0.9824,0.9976,shared weights (both directions)
+93,0.3,0.4,0.3,0.9908,0.9792,0.9908,shared weights (both directions)
+94,0.4,0.35,0.25,0.9829,0.9787,0.9873,shared weights (both directions)
+95,0.3,0.4,0.3,0.9933,0.9798,0.9933,shared weights (both directions)
+96,0.3,0.4,0.3,0.9868,0.9787,0.9868,shared weights (both directions)
+97,0.3,0.4,0.3,0.9916,0.9786,0.9916,shared weights (both directions)
+98,0.3,0.4,0.3,0.9883,0.9755,0.9883,shared weights (both directions)
+99,0.4,0.45,0.15,0.9821,0.9743,0.9873,shared weights (both directions)
+100,0.3,0.35,0.35,0.9942,0.9816,0.996,shared weights (both directions)
+101,0.35,0.45,0.2,0.9855,0.9773,0.9873,shared weights (both directions)
+102,0.3,0.4,0.3,0.9928,0.9735,0.9928,shared weights (both directions)
+103,0.3,0.4,0.3,0.9952,0.9759,0.9952,shared weights (both directions)
+104,0.3,0.4,0.3,0.9935,0.9788,0.9935,shared weights (both directions)
+105,0.3,0.4,0.3,0.9911,0.9807,0.9911,shared weights (both directions)
+106,0.35,0.45,0.2,0.9914,0.9862,0.9931,shared weights (both directions)
+107,0.3,0.4,0.3,0.9935,0.9765,0.9935,shared weights (both directions)
+108,0.3,0.4,0.3,0.9908,0.9821,0.9908,shared weights (both directions)
+109,0.3,0.4,0.3,0.9976,0.9855,0.9976,shared weights (both directions)
+110,0.4,0.35,0.25,0.9909,0.9892,0.9952,shared weights (both directions)
+111,0.3,0.4,0.3,0.9888,0.9797,0.9888,shared weights (both directions)
+112,0.35,0.45,0.2,0.9954,0.9873,0.9971,shared weights (both directions)
+113,0.3,0.4,0.3,0.996,0.9872,0.996,shared weights (both directions)
+114,0.3,0.4,0.3,0.9937,0.9811,0.9937,shared weights (both directions)
+115,0.3,0.4,0.3,0.9908,0.9783,0.9908,shared weights (both directions)
+116,0.3,0.4,0.3,0.9873,0.9743,0.9873,shared weights (both directions)
+117,0.3,0.4,0.3,1.0,0.9799,1.0,shared weights (both directions)
+118,0.3,0.4,0.3,0.9984,0.9836,0.9984,shared weights (both directions)
+119,0.35,0.45,0.2,0.9914,0.9799,0.9931,shared weights (both directions)
+120,0.3,0.4,0.3,0.9908,0.9753,0.9908,shared weights (both directions)
+121,0.3,0.4,0.3,0.9995,0.9801,0.9995,shared weights (both directions)
+122,0.3,0.4,0.3,0.9941,0.9899,0.9941,shared weights (both directions)
+123,0.35,0.45,0.2,0.994,0.9751,0.9957,shared weights (both directions)
+124,0.3,0.4,0.3,0.9971,0.9894,0.9971,shared weights (both directions)
+125,0.35,0.45,0.2,0.9938,0.9736,0.9955,shared weights (both directions)
+126,0.3,0.35,0.35,0.9908,0.9783,0.9926,shared weights (both directions)
+127,0.3,0.4,0.3,0.9976,0.9831,0.9976,shared weights (both directions)
+128,0.3,0.4,0.3,0.9951,0.9787,0.9951,shared weights (both directions)
+129,0.4,0.5,0.1,0.9794,0.9774,0.9935,shared weights (both directions)
+130,0.3,0.4,0.3,0.9957,0.9759,0.9957,shared weights (both directions)
+131,0.3,0.35,0.35,0.9908,0.9818,0.9926,shared weights (both directions)
+132,0.35,0.45,0.2,0.9855,0.9813,0.9873,shared weights (both directions)
+133,0.4,0.35,0.25,0.9891,0.9779,0.9935,shared weights (both directions)
+134,0.4,0.35,0.25,0.9914,0.9746,0.9957,shared weights (both directions)
+135,0.35,0.45,0.2,0.9895,0.9791,0.9912,shared weights (both directions)
+136,0.35,0.45,0.2,0.9855,0.9723,0.9873,shared weights (both directions)
+137,0.35,0.4,0.25,0.9906,0.9842,0.9933,shared weights (both directions)
+138,0.35,0.45,0.2,0.9967,0.9864,0.9984,shared weights (both directions)
+139,0.35,0.45,0.2,0.9954,0.9839,0.9971,shared weights (both directions)
+140,0.3,0.4,0.3,0.9917,0.979,0.9917,shared weights (both directions)
+141,0.35,0.45,0.2,0.9915,0.9713,0.9933,shared weights (both directions)
+142,0.3,0.4,0.3,0.9952,0.9866,0.9952,shared weights (both directions)
+143,0.3,0.4,0.3,0.9897,0.9824,0.9897,shared weights (both directions)
+144,0.3,0.4,0.3,0.9984,0.9757,0.9984,shared weights (both directions)
+145,0.35,0.45,0.2,0.9895,0.9756,0.9912,shared weights (both directions)
+146,0.3,0.35,0.35,0.9981,0.9832,1.0,shared weights (both directions)
+147,0.35,0.4,0.25,0.9949,0.9879,0.9976,shared weights (both directions)
+148,0.3,0.4,0.3,0.9897,0.9835,0.9897,shared weights (both directions)
+149,0.4,0.35,0.25,0.9893,0.9825,0.9937,shared weights (both directions)
+150,0.4,0.45,0.15,0.9885,0.9829,0.9937,shared weights (both directions)
+151,0.35,0.45,0.2,0.9924,0.9773,0.9941,shared weights (both directions)
+152,0.3,0.4,0.3,0.9928,0.9851,0.9928,shared weights (both directions)
+153,0.3,0.35,0.35,0.9889,0.9807,0.9908,shared weights (both directions)
+154,0.3,0.4,0.3,0.9908,0.9732,0.9908,shared weights (both directions)
+155,0.45,0.3,0.25,0.9931,0.9836,0.9984,shared weights (both directions)
+156,0.3,0.4,0.3,0.9933,0.9872,0.9933,shared weights (both directions)
+157,0.35,0.4,0.25,0.9846,0.9755,0.9873,shared weights (both directions)
+158,0.4,0.45,0.15,0.9856,0.9665,0.9908,shared weights (both directions)
+159,0.35,0.4,0.25,0.993,0.9856,0.9957,shared weights (both directions)
+160,0.3,0.4,0.3,0.9911,0.9776,0.9911,shared weights (both directions)
+161,0.3,0.4,0.3,0.9971,0.9838,0.9971,shared weights (both directions)
+162,0.3,0.4,0.3,0.9908,0.9857,0.9908,shared weights (both directions)
+163,0.3,0.4,0.3,0.9888,0.9794,0.9888,shared weights (both directions)
+164,0.35,0.4,0.25,0.9846,0.9734,0.9873,shared weights (both directions)
+165,0.35,0.45,0.2,0.9967,0.9857,0.9984,shared weights (both directions)
+166,0.3,0.4,0.3,0.9955,0.9771,0.9955,shared weights (both directions)
+167,0.3,0.4,0.3,0.9971,0.9839,0.9971,shared weights (both directions)
+168,0.3,0.4,0.3,0.9897,0.975,0.9897,shared weights (both directions)
+169,0.3,0.4,0.3,0.9883,0.9844,0.9883,shared weights (both directions)
+170,0.3,0.4,0.3,0.994,0.9828,0.994,shared weights (both directions)
+171,0.35,0.45,0.2,0.9919,0.9877,0.9937,shared weights (both directions)
+172,0.3,0.4,0.3,0.9937,0.9784,0.9937,shared weights (both directions)
+173,0.35,0.45,0.2,0.9855,0.9696,0.9873,shared weights (both directions)
+174,0.3,0.4,0.3,0.9941,0.9847,0.9941,shared weights (both directions)
+175,0.3,0.4,0.3,0.9976,0.9783,0.9976,shared weights (both directions)
+176,0.3,0.4,0.3,0.9911,0.984,0.9911,shared weights (both directions)
+177,0.4,0.35,0.25,0.9936,0.9842,0.998,shared weights (both directions)
+178,0.35,0.45,0.2,0.9943,0.9858,0.996,shared weights (both directions)
+179,0.3,0.4,0.3,0.9976,0.9837,0.9976,shared weights (both directions)
+180,0.3,0.4,0.3,0.9928,0.9821,0.9928,shared weights (both directions)
+181,0.3,0.4,0.3,0.994,0.9805,0.994,shared weights (both directions)
+182,0.3,0.4,0.3,0.9916,0.9764,0.9916,shared weights (both directions)
+183,0.4,0.45,0.15,0.9903,0.9855,0.9955,shared weights (both directions)
+184,0.3,0.4,0.3,0.9908,0.9745,0.9908,shared weights (both directions)
+185,0.3,0.4,0.3,0.9933,0.9789,0.9933,shared weights (both directions)
+186,0.3,0.35,0.35,0.9937,0.9916,0.9955,shared weights (both directions)
+187,0.3,0.4,0.3,0.9926,0.9771,0.9926,shared weights (both directions)
+188,0.4,0.45,0.15,0.989,0.9759,0.9941,shared weights (both directions)
+189,0.3,0.4,0.3,0.996,0.9795,0.996,shared weights (both directions)
+190,0.3,0.4,0.3,0.9911,0.9752,0.9911,shared weights (both directions)
+191,0.3,0.4,0.3,0.9911,0.9819,0.9911,shared weights (both directions)
+192,0.3,0.4,0.3,0.9868,0.9682,0.9868,shared weights (both directions)
+193,0.3,0.35,0.35,0.9894,0.9873,0.9912,shared weights (both directions)
+194,0.4,0.45,0.15,0.9836,0.9698,0.9888,shared weights (both directions)
+195,0.3,0.4,0.3,0.9916,0.973,0.9916,shared weights (both directions)
+196,0.35,0.45,0.2,0.9933,0.9789,0.9951,shared weights (both directions)
+197,0.3,0.4,0.3,0.9911,0.9777,0.9911,shared weights (both directions)
+198,0.3,0.4,0.3,0.998,0.9827,0.998,shared weights (both directions)
+199,0.3,0.4,0.3,0.9911,0.9818,0.9911,shared weights (both directions)
