@@ -32,6 +32,19 @@ public class RecommendationServiceImpl implements RecommendationService {
     private static final int MAX_LIMIT = 50;
     private static final int SIMILARITY_POOL = 1000;
 
+    // Најмногу поени прво; при ист скор победува поголемата AI сличност (tie-break).
+    // Ако и тоа е исто, редоследот го решава ID-то (влезот е однапред сортиран по ID,
+    // а sorted() е стабилен), па резултатот е секогаш ист.
+    private static final Comparator<RecommendedPostingResponse> POSTING_ORDER =
+            Comparator.comparingDouble(RecommendedPostingResponse::score)
+                    .thenComparingDouble(RecommendedPostingResponse::similarity)
+                    .reversed();
+
+    private static final Comparator<CandidateResponse> CANDIDATE_ORDER =
+            Comparator.comparingDouble(CandidateResponse::score)
+                    .thenComparingDouble(CandidateResponse::similarity)
+                    .reversed();
+
     private final UserRepository userRepository;
     private final JobPostingRepository postingRepository;
     private final UserSkillRepository userSkillRepository;
@@ -64,6 +77,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         List<PostingResponse> postings = postingService.getByIds(postingRepository.findActiveIds());
 
         return postings.stream()
+                .sorted(Comparator.comparing(PostingResponse::id))
                 .map(p -> {
                     double sim = clamp(similarity.getOrDefault(p.id(), 0.0));
                     SkillMatchResponse match = skillMatcher.match(skillIds, p.skills());
@@ -73,7 +87,7 @@ public class RecommendationServiceImpl implements RecommendationService {
                             + w.category() * (categoryMatch ? 1.0 : 0.0);
                     return new RecommendedPostingResponse(p, round(score), round(sim), match, categoryMatch);
                 })
-                .sorted(Comparator.comparingDouble(RecommendedPostingResponse::score).reversed())
+                .sorted(POSTING_ORDER)
                 .limit(safeLimit(limit))
                 .toList();
     }
@@ -110,7 +124,11 @@ public class RecommendationServiceImpl implements RecommendationService {
                         Collectors.mapping(ui -> ui.getCategory().getId(), Collectors.toSet())));
 
         List<CandidateResponse> result = new ArrayList<>();
-        for (User u : users.values()) {
+        // сортирано по ID за повторлив редослед при потполно исти резултати
+        List<User> orderedUsers = users.values().stream()
+                .sorted(Comparator.comparing(User::getId))
+                .toList();
+        for (User u : orderedUsers) {
             List<UserSkill> userSkills = skillsByUser.getOrDefault(u.getId(), List.of());
             Set<Long> skillIds = userSkills.stream()
                     .map(us -> us.getSkill().getId())
@@ -135,7 +153,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         }
 
         return result.stream()
-                .sorted(Comparator.comparingDouble(CandidateResponse::score).reversed())
+                .sorted(CANDIDATE_ORDER)
                 .limit(safeLimit(limit))
                 .toList();
     }
