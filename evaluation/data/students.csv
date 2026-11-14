@@ -1,0 +1,21 @@
+seed_id,db_id,email,name,archetype,interests,skills
+S01,80,stefan.trajkovski@example.com,Stefan Trajkovski,Java backend developer,IT & Software,Java:ADVANCED;Spring Boot:ADVANCED;REST API:INTERMEDIATE;SQL:INTERMEDIATE;PostgreSQL:INTERMEDIATE;Hibernate:INTERMEDIATE;Git:INTERMEDIATE;Docker:BEGINNER
+S02,81,ivana.stojanovska@example.com,Ivana Stojanovska,Frontend React developer,IT & Software,JavaScript:ADVANCED;React:ADVANCED;HTML:ADVANCED;CSS:ADVANCED;Tailwind CSS:INTERMEDIATE;TypeScript:INTERMEDIATE;Git:INTERMEDIATE;Figma:BEGINNER
+S03,82,nikola.dimitrievski@example.com,Nikola Dimitrievski,Full-stack JavaScript developer,IT & Software,JavaScript:ADVANCED;Node.js:INTERMEDIATE;React:INTERMEDIATE;REST API:INTERMEDIATE;MongoDB:INTERMEDIATE;Docker:INTERMEDIATE;Git:INTERMEDIATE;TypeScript:BEGINNER
+S04,83,elena.ristovska@example.com,Elena Ristovska,Machine learning / NLP student,IT & Software,Python:ADVANCED;Machine Learning:INTERMEDIATE;Pandas:INTERMEDIATE;PyTorch:INTERMEDIATE;NLP:INTERMEDIATE;SQL:INTERMEDIATE;Git:BEGINNER
+S05,84,filip.angelovski@example.com,Filip Angelovski,DevOps / infrastructure enthusiast,IT & Software,Linux:ADVANCED;Docker:ADVANCED;Git:INTERMEDIATE;CI/CD:INTERMEDIATE;Python:INTERMEDIATE;SQL:BEGINNER
+S06,85,sara.kostovska@example.com,Sara Kostovska,Financial analyst,Finance & Accounting,Financial Analysis:ADVANCED;Excel:ADVANCED;Financial Reporting:INTERMEDIATE;Budgeting:INTERMEDIATE;SQL:BEGINNER
+S07,86,martin.jovanovski@example.com,Martin Jovanovski,Accounting and audit student,Finance & Accounting,Accounting:ADVANCED;Auditing:INTERMEDIATE;Bookkeeping:INTERMEDIATE;Excel:ADVANCED;Financial Reporting:INTERMEDIATE
+S08,87,teodora.nikolovska@example.com,Teodora Nikolovska,Junior bookkeeper,Finance & Accounting,Bookkeeping:INTERMEDIATE;Accounting:BEGINNER;Excel:INTERMEDIATE
+S09,88,viktor.mitrevski@example.com,Viktor Mitrevski,SEO and content marketer,Marketing & Sales,SEO:ADVANCED;Content Writing:ADVANCED;Google Analytics:INTERMEDIATE;Copywriting:INTERMEDIATE;Market Research:BEGINNER
+S10,89,anastasija.georgievska@example.com,Anastasija Georgievska,Social media marketer,Marketing & Sales,Social Media Marketing:ADVANCED;Content Writing:INTERMEDIATE;Copywriting:INTERMEDIATE;Google Analytics:BEGINNER;Photoshop:BEGINNER
+S11,90,david.popovski@example.com,David Popovski,Sales-oriented student,Marketing & Sales,Sales:ADVANCED;Public Speaking:ADVANCED;Market Research:INTERMEDIATE;Email Marketing:BEGINNER
+S12,91,katerina.velkovska@example.com,Katerina Velkovska,Email and growth marketer,Marketing & Sales,Email Marketing:ADVANCED;Google Analytics:ADVANCED;SEO:INTERMEDIATE;Copywriting:INTERMEDIATE;Social Media Marketing:INTERMEDIATE
+S13,92,jana.todorovska@example.com,Jana Todorovska,UI/UX designer,Design & Creative,UI/UX Design:ADVANCED;Figma:ADVANCED;Graphic Design:INTERMEDIATE;HTML:INTERMEDIATE;CSS:BEGINNER
+S14,93,luka.spasovski@example.com,Luka Spasovski,Graphic and brand designer,Design & Creative,Graphic Design:ADVANCED;Photoshop:ADVANCED;Illustrator:ADVANCED;Figma:BEGINNER
+S15,94,bojan.krstevski@example.com,Bojan Krstevski,Video editor,Design & Creative,Video Editing:ADVANCED;Photoshop:INTERMEDIATE;Social Media Marketing:INTERMEDIATE;Illustrator:BEGINNER
+S16,95,mila.ilievska@example.com,Mila Ilievska,Project manager,Business & Management,Project Management:ADVANCED;Time Management:ADVANCED;Team Leadership:ADVANCED;Business Analysis:INTERMEDIATE
+S17,96,andrej.markovski@example.com,Andrej Markovski,Business analyst,Business & Management,Business Analysis:ADVANCED;SQL:INTERMEDIATE;Excel:ADVANCED;Project Management:INTERMEDIATE
+S18,97,simona.arsovska@example.com,Simona Arsovska,Customer support specialist,Business & Management,Customer Support:ADVANCED;Public Speaking:INTERMEDIATE;Time Management:ADVANCED
+S19,98,kristijan.zdravkovski@example.com,Kristijan Zdravkovski,Borderline: finance + data,Finance & Accounting;IT & Software,Financial Analysis:ADVANCED;SQL:ADVANCED;Python:INTERMEDIATE;Pandas:INTERMEDIATE;Excel:INTERMEDIATE
+S20,99,dario.naumovski@example.com,Dario Naumovski,Weak / vague profile,Business & Management,Time Management:BEGINNER;Excel:BEGINNER;Public Speaking:BEGINNER

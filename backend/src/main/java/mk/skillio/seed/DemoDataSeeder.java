@@ -72,6 +72,7 @@ public class DemoDataSeeder implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final SkillRepository skillRepository;
     private final UserRepository userRepository;
+    private final EvaluationExporter evaluationExporter;
 
     @Override
     public void run(String... args) {
@@ -149,6 +150,7 @@ public class DemoDataSeeder implements CommandLineRunner {
         }
 
         printSummary(newPostingIds.size(), newStudentIds.size(), failed);
+        evaluationExporter.export();
     }
 
     // ------------------------------------------------------------------ companies

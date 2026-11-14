@@ -1,0 +1,15 @@
+{
+  "base_url": "http://localhost:8080",
+  "seed": 42,
+  "students": 20,
+  "postings": 40,
+  "shuffles": 200,
+  "bootstrap": 2000,
+  "ks": [
+    3,
+    5,
+    10
+  ],
+  "finished": "2026-11-14 22:20:31",
+  "seconds": 11.8
+}

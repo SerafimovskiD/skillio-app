@@ -1,0 +1,41 @@
+seed_id,db_id,company_email,category,title,type,work_mode,required_skills,optional_skills
+IT-01,105,novabyte@example.com,IT & Software,Junior Java Backend Developer,JOB,HYBRID,Java;Spring Boot;REST API;SQL,Hibernate;PostgreSQL;Git;Docker
+IT-02,106,novabyte@example.com,IT & Software,Frontend Developer Intern (React),INTERNSHIP,HYBRID,JavaScript;React;HTML;CSS,TypeScript;Tailwind CSS;Git
+IT-03,107,stackline@example.com,IT & Software,Full-Stack Developer (Node.js & React),JOB,REMOTE,JavaScript;Node.js;React;REST API,TypeScript;MongoDB;PostgreSQL;Docker
+IT-04,108,stackline@example.com,IT & Software,DevOps Engineer Intern,INTERNSHIP,ON_SITE,Linux;Docker;Git,CI/CD;Python
+IT-05,109,vertex@example.com,IT & Software,Machine Learning Engineer Intern,INTERNSHIP,REMOTE,Python;Machine Learning;Pandas,PyTorch;NLP;SQL;Git
+IT-06,110,vertex@example.com,IT & Software,NLP Engineer,JOB,REMOTE,Python;NLP;PyTorch;FastAPI,Machine Learning;Docker;Git
+IT-07,111,stackline@example.com,IT & Software,.NET Developer,JOB,ON_SITE,C#;SQL;REST API,MySQL;Git;CI/CD
+IT-08,112,novabyte@example.com,IT & Software,Python Backend Developer (FastAPI),JOB,HYBRID,Python;FastAPI;PostgreSQL;REST API,Docker;Linux;Git
+FIN-01,113,meridian@example.com,Finance & Accounting,Junior Financial Analyst,JOB,ON_SITE,Financial Analysis;Excel;Financial Reporting,Budgeting;SQL
+FIN-02,114,meridian@example.com,Finance & Accounting,Finance Intern,INTERNSHIP,HYBRID,Excel;Accounting,Budgeting;Financial Analysis
+FIN-03,115,balkanledger@example.com,Finance & Accounting,Audit Associate,JOB,ON_SITE,Auditing;Accounting;Excel,Financial Reporting
+FIN-04,116,balkanledger@example.com,Finance & Accounting,Audit Intern,INTERNSHIP,ON_SITE,Auditing;Excel,Accounting;Bookkeeping
+FIN-05,117,balkanledger@example.com,Finance & Accounting,Bookkeeper,JOB,HYBRID,Bookkeeping;Accounting;Excel,Financial Reporting
+FIN-06,118,meridian@example.com,Finance & Accounting,Budget & Planning Analyst,JOB,HYBRID,Budgeting;Financial Analysis;Excel,Financial Reporting;SQL
+FIN-07,119,northgate@example.com,Finance & Accounting,Accounting Intern,INTERNSHIP,ON_SITE,Accounting;Bookkeeping,Excel;Budgeting
+FIN-08,120,vertex@example.com,Finance & Accounting,Financial Data Analyst,JOB,REMOTE,Financial Analysis;SQL;Excel,Python;Pandas;Financial Reporting
+MKT-01,121,pulse@example.com,Marketing & Sales,SEO Specialist,JOB,HYBRID,SEO;Google Analytics;Content Writing,Market Research
+MKT-02,122,pulse@example.com,Marketing & Sales,Social Media Marketing Intern,INTERNSHIP,HYBRID,Social Media Marketing;Content Writing,Copywriting;Google Analytics
+MKT-03,123,pulse@example.com,Marketing & Sales,Content Marketing Writer,JOB,REMOTE,Content Writing;Copywriting;SEO,Social Media Marketing
+MKT-04,124,brightwave@example.com,Marketing & Sales,Sales Development Representative,JOB,ON_SITE,Sales;Market Research,Email Marketing;Public Speaking
+MKT-05,125,brightwave@example.com,Marketing & Sales,Email Marketing Specialist,JOB,REMOTE,Email Marketing;Copywriting;Google Analytics,SEO
+MKT-06,126,brightwave@example.com,Marketing & Sales,Sales Intern,INTERNSHIP,ON_SITE,Sales,Public Speaking;Market Research
+MKT-07,127,pulse@example.com,Marketing & Sales,Market Research Analyst Intern,INTERNSHIP,HYBRID,Market Research;Excel;Google Analytics,SQL
+MKT-08,128,brightwave@example.com,Marketing & Sales,E-commerce Growth Marketer,JOB,HYBRID,Google Analytics;SEO;Email Marketing,Social Media Marketing;Sales
+DES-01,129,pixelforge@example.com,Design & Creative,UI/UX Designer,JOB,HYBRID,UI/UX Design;Figma,Graphic Design
+DES-02,130,pixelforge@example.com,Design & Creative,UI/UX Design Intern,INTERNSHIP,HYBRID,Figma;UI/UX Design,Graphic Design;Photoshop
+DES-03,131,pixelforge@example.com,Design & Creative,Graphic Designer,JOB,ON_SITE,Graphic Design;Photoshop;Illustrator,Figma
+DES-04,132,pixelforge@example.com,Design & Creative,Video Editor,JOB,REMOTE,Video Editing,Photoshop;Illustrator;Social Media Marketing
+DES-05,133,pulse@example.com,Design & Creative,Creative Design Intern (Social Media Visuals),INTERNSHIP,HYBRID,Graphic Design;Photoshop,Video Editing;Social Media Marketing
+DES-06,134,novabyte@example.com,Design & Creative,Product Designer,JOB,REMOTE,UI/UX Design;Figma,HTML;CSS;Tailwind CSS
+DES-07,135,pixelforge@example.com,Design & Creative,Brand Identity Designer,JOB,HYBRID,Illustrator;Graphic Design,Photoshop;Figma
+DES-08,136,brightwave@example.com,Design & Creative,Motion & Video Intern,INTERNSHIP,ON_SITE,Video Editing;Photoshop,Graphic Design
+BUS-01,137,orbit@example.com,Business & Management,Junior Project Manager,JOB,HYBRID,Project Management;Time Management;Team Leadership,Business Analysis
+BUS-02,138,orbit@example.com,Business & Management,Business Analyst,JOB,HYBRID,Business Analysis;SQL,Project Management;Excel
+BUS-03,139,orbit@example.com,Business & Management,Business Analyst Intern,INTERNSHIP,ON_SITE,Business Analysis;Excel,SQL;Public Speaking
+BUS-04,140,northgate@example.com,Business & Management,Customer Support Specialist,JOB,REMOTE,Customer Support;Time Management,Public Speaking;Email Marketing
+BUS-05,141,northgate@example.com,Business & Management,Operations Coordinator,JOB,ON_SITE,Project Management;Time Management,Excel;Team Leadership
+BUS-06,142,orbit@example.com,Business & Management,Project Management Intern,INTERNSHIP,HYBRID,Project Management;Time Management,Business Analysis
+BUS-07,143,northgate@example.com,Business & Management,Customer Success Intern,INTERNSHIP,REMOTE,Customer Support;Public Speaking,Time Management
+BUS-08,144,orbit@example.com,Business & Management,"Team Lead, Delivery",JOB,ON_SITE,Team Leadership;Project Management;Public Speaking,Business Analysis
