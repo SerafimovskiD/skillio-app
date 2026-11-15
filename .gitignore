@@ -19,6 +19,9 @@ __pycache__/
 .env
 *.env.local
 
+# Uploaded files (CV)
+uploads/
+
 # OS
 .DS_Store
 Thumbs.db
