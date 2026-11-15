@@ -29,7 +29,8 @@ import java.util.stream.Collectors;
  *   evaluation/data/students.csv    seeded students (seed id, database id, skills, ...)
  *   evaluation/data/relevance.csv   ground truth grade (0/1/2) for every student-posting pair
  * </pre>
- * Paths are relative to the working directory (the project root when started from IntelliJ).
+ * The files are written to the evaluation folder in the repository root, no matter whether the backend is
+ * started from the root (IntelliJ) or from backend/ (mvnw).
  * Runs at the end of the seeder, also when everything already existed, so the files are always current.
  */
 @Slf4j
@@ -38,11 +39,25 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EvaluationExporter {
 
-    private static final Path DATA_DIR = Path.of("evaluation", "data");
-    private static final Path OVERRIDES = Path.of("evaluation", "overrides.csv");
+    private static final Path ROOT = projectRoot();
+    private static final Path DATA_DIR = ROOT.resolve("evaluation").resolve("data");
+    private static final Path OVERRIDES = ROOT.resolve("evaluation").resolve("overrides.csv");
 
     private final PostingService postingService;
     private final UserRepository userRepository;
+
+    /** The evaluation folder is in the repository root; the backend may be started from backend/ or from the root. */
+    private static Path projectRoot() {
+        Path current = Path.of("").toAbsolutePath();
+        if (Files.isDirectory(current.resolve("evaluation"))) {
+            return current;
+        }
+        Path parent = current.getParent();
+        if (parent != null && Files.isDirectory(parent.resolve("evaluation"))) {
+            return parent;
+        }
+        return current;
+    }
 
     public void export() {
         try {

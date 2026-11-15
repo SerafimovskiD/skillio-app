@@ -1,6 +1,6 @@
 # Skillio
 
-Web platform for internships and jobs with AI-based recommendations (diploma thesis, FINKI).
+Web platform for internships and jobs with AI-based recommendations (FINKI).
 
 Students get recommended postings and companies get recommended candidates. The ranking combines
 semantic similarity (multilingual sentence embeddings), skill match and category match.
@@ -64,6 +64,10 @@ The seeder is idempotent (existing e-mails are skipped), uses only `@example.com
 the evaluation files to `evaluation/data/`. **Clear the profile afterwards.**
 All accounts, with the shared password, are listed in [SEED_DATA.md](SEED_DATA.md).
 
+Note: the CSV files in `evaluation/data/` contain database IDs, so the seeder regenerates them for **your**
+database every time it runs (the files committed to the repository come from the author's database).
+Run the seed before the evaluation.
+
 ## Configuration
 Defaults work for local development. They can be overridden with environment variables:
 
@@ -80,7 +84,8 @@ The recommendation weights (`recommendation.weights.*`, default 0.6 / 0.3 / 0.1)
 ## Evaluation
 The recommendation quality is evaluated against a rule-based ground truth for the seeded data
 (P@K, R@K, MRR, nDCG@K, bootstrap confidence intervals, paired comparison, weight sensitivity).
-With the database, AI service and backend running (**without** the `seed` profile):
+After loading the demo data (see above), keep the database and the AI service running, start the backend
+**without** the `seed` profile and run:
 
 ```
 pip install -r evaluation/requirements.txt
